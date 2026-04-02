@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipes — Lydia's Recommendations</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --dark:#141413; --light:#faf9f5; --mid-gray:#b0aea5; --light-gray:#e8e6dc; --orange:#d97757; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--light);color:var(--dark);font-family:"DM Sans",sans-serif;min-height:100vh;}
+  .nav{background:var(--dark);padding:14px 20px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;}
+  .nav a{color:var(--mid-gray);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:5px 12px;border-radius:20px;transition:color 0.2s,background 0.2s;}
+  .nav a:hover,.nav a.active{color:var(--light);background:rgba(255,255,255,0.12);}
+  .page-hero{background:var(--dark);padding:40px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+  .page-hero::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:var(--orange);opacity:0.12;}
+  .hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+  .page-hero h1{font-family:"Playfair Display",serif;font-size:clamp(28px,6vw,42px);color:var(--light);font-weight:400;line-height:1.15;}
+  .page-hero h1 em{font-style:italic;color:var(--orange);}
+  .section{padding:40px 20px 32px;max-width:600px;margin:0 auto;}
+  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+  .section-icon{font-size:22px;}
+  .section-title{font-family:"Playfair Display",serif;font-size:26px;font-weight:600;color:var(--dark);}
+  .section-line{flex:1;height:1px;background:var(--light-gray);}
+  .product-card{background:white;border-radius:16px;padding:20px;margin-bottom:14px;display:flex;align-items:center;gap:16px;box-shadow:0 1px 3px rgba(20,20,19,0.06);transition:transform 0.2s,box-shadow 0.2s;text-decoration:none;color:inherit;}
+  .product-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(20,20,19,0.1);}
+  .product-emoji{font-size:32px;min-width:48px;text-align:center;}
+  .product-info{flex:1;}
+  .product-name{font-size:15px;font-weight:500;color:var(--dark);margin-bottom:4px;line-height:1.3;}
+  .product-note{font-size:13px;color:var(--mid-gray);font-weight:300;line-height:1.4;}
+  .product-cta{font-size:12px;font-weight:500;color:var(--orange);white-space:nowrap;}
+  .product-cta::after{content:"→";}
+  .recipe-card{background:white;border-radius:16px;margin-bottom:14px;box-shadow:0 1px 3px rgba(20,20,19,0.06);overflow:hidden;}
+  .recipe-header{display:flex;align-items:center;gap:12px;padding:18px 20px;cursor:pointer;user-select:none;}
+  .recipe-header:hover{background:#fdf9f2;}
+  .recipe-emoji{font-size:28px;min-width:40px;text-align:center;}
+  .recipe-title-wrap{flex:1;}
+  .recipe-name{font-size:15px;font-weight:500;color:var(--dark);margin-bottom:3px;}
+  .recipe-meta{font-size:12px;color:var(--mid-gray);font-weight:300;}
+  .recipe-toggle{font-size:22px;color:var(--orange);transition:transform 0.3s;line-height:1;}
+  .recipe-toggle.open{transform:rotate(45deg);}
+  .recipe-body{display:none;padding:0 20px 20px;border-top:1px solid var(--light-gray);}
+  .recipe-body.open{display:block;animation:fadeUp 0.25s ease both;}
+  .recipe-section-label{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin:16px 0 8px;}
+  .recipe-ingredients{list-style:none;padding:0;}
+  .recipe-ingredients li{font-size:14px;color:var(--dark);padding:6px 0;border-bottom:1px solid var(--light-gray);font-weight:300;line-height:1.4;}
+  .recipe-ingredients li:last-child{border-bottom:none;}
+  .recipe-steps{list-style:none;padding:0;counter-reset:steps;}
+  .recipe-steps li{font-size:14px;color:var(--dark);padding:8px 0 8px 34px;border-bottom:1px solid var(--light-gray);font-weight:300;line-height:1.5;position:relative;counter-increment:steps;}
+  .recipe-steps li::before{content:counter(steps);position:absolute;left:0;top:9px;width:20px;height:20px;background:var(--orange);color:white;border-radius:50%;font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .recipe-steps li:last-child{border-bottom:none;}
+  footer{text-align:center;padding:40px 24px 48px;font-size:12px;color:var(--mid-gray);line-height:1.8;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+<nav class="nav"><a href="https://lydia-wu.github.io/recommendations/" class="">Home</a><a href="https://lydia-wu.github.io/recommendations/recipes" class="active">Recipes</a><a href="https://lydia-wu.github.io/recommendations/bread" class="">Bread</a><a href="https://lydia-wu.github.io/recommendations/baby" class="">Baby</a><a href="https://lydia-wu.github.io/recommendations/ec" class="">EC</a></nav>
+<div class="page-hero">
+  <p class="hero-eyebrow">Tried & tested</p>
+  <h1>Lydia's <em>Recipes</em></h1>
+</div>
+<div class="section">
+  <div class="section-header"><span class="section-icon">👩‍🍳</span><h2 class="section-title">Recipes</h2><div class="section-line"></div></div>
+<!-- Sourdough Lenten Cookies -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">✝️</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Sourdough Lenten Cookies</div>
+        <div class="recipe-meta">Orthodox Lenten · No eggs, dairy, meat, or fish · Uses discard!</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Ingredients</div>
+      <ul class="recipe-ingredients">
+        <li>300g sourdough starter</li>
+        <li>225g all-purpose flour</li>
+        <li>125g sugar</li>
+        <li>75g water</li>
+        <li>56g tahini</li>
+        <li>1.3 tsp vanilla extract</li>
+        <li>5g baking soda</li>
+        <li>2.5g cinnamon</li>
+        <li>2.5g salt</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Mix together starter, tahini, sugar, water, and vanilla until smooth.</li>
+        <li>Add flour, baking soda, cinnamon, and salt. Stir until a soft dough forms.</li>
+        <li>Rest dough 30 minutes — this helps the starter relax it.</li>
+        <li>Preheat oven to 350°F / 175°C.</li>
+        <li>Scoop onto a parchment-lined baking sheet and flatten each cookie slightly.</li>
+        <li>Bake 12–15 minutes until edges are golden.</li>
+        <li>Cool on the pan — they firm up as they cool. Keeps 4–5 days in a tin.</li>
+      </ol>
+      <div class="recipe-section-label">Optional Add-ins</div>
+      <ul class="recipe-ingredients">
+        <li>Raisins, dried cranberries, or chopped dates</li>
+        <li>Walnuts or almonds</li>
+        <li>Sesame seeds on top</li>
+        <li>Lemon or orange zest</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Apple PB Bobo Bars -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🍎</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Apple Peanut Butter Bobo Bars</div>
+        <div class="recipe-meta">Makes ~12 bars · 8x8 pan · 350°F / 175°C</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Dry</div>
+      <ul class="recipe-ingredients">
+        <li>160g rolled oats</li>
+        <li>80g oat flour <em style="color:var(--mid-gray);font-size:12px">(just blend oats)</em></li>
+        <li>1.5g (¼ tsp) salt</li>
+        <li>2g (¾ tsp) cinnamon</li>
+      </ul>
+      <div class="recipe-section-label">Wet</div>
+      <ul class="recipe-ingredients">
+        <li>130g peanut butter</li>
+        <li>160g maple syrup or honey</li>
+        <li>75g coconut oil, melted</li>
+        <li>5g (1 tsp) vanilla extract</li>
+      </ul>
+      <div class="recipe-section-label">Fold In</div>
+      <ul class="recipe-ingredients">
+        <li>75g (~½ medium) apple, finely diced — dice small so it distributes evenly!</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Preheat oven to 350°F / 175°C. Line 8x8 pan with parchment.</li>
+        <li>Whisk all wet ingredients together.</li>
+        <li>Stir in dry ingredients until combined.</li>
+        <li>Fold in diced apple.</li>
+        <li>Press firmly into the pan — really pack it in.</li>
+        <li>Bake 20–25 min until edges are golden.</li>
+        <li>Cool completely before cutting. (I know it's hard to wait! 😄)</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Thin Mint Cookies -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🍪</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Healthier Thin Mint Cookies</div>
+        <div class="recipe-meta">GF · DF · Refined sugar-free · Makes ~40 · Best frozen!</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Cookies</div>
+      <ul class="recipe-ingredients">
+        <li>240g almond flour</li>
+        <li>50g cocoa powder</li>
+        <li>1.5g salt</li>
+        <li>90g maple syrup, room temp</li>
+        <li>55g coconut oil, melted</li>
+        <li>4g peppermint extract</li>
+      </ul>
+      <div class="recipe-section-label">Chocolate Coating</div>
+      <ul class="recipe-ingredients">
+        <li>340g dark or semi-sweet chocolate</li>
+        <li>18–27g coconut oil</li>
+        <li>2g peppermint extract</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Mix 240g almond flour, 50g cocoa powder, and 1.5g salt. Add 90g maple syrup, 55g melted coconut oil, and 4g peppermint extract. Stir until dough forms.</li>
+        <li>Refrigerate 30 minutes.</li>
+        <li>Roll between parchment to ¼-inch thick. Cut into rounds.</li>
+        <li>Bake at 350°F / 175°C for 8–10 minutes. Cool completely.</li>
+        <li>Melt 340g chocolate with 18–27g coconut oil, stir in 2g peppermint extract.</li>
+        <li>Dip each cookie, place on parchment, freeze until set.</li>
+        <li>Store in fridge or freezer.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Carrot Cake Truffles -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🥕</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Carrot Cake Truffles</div>
+        <div class="recipe-meta">By Emily & Levi Jensen · No bake · Freeze to set</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Cake</div>
+      <ul class="recipe-ingredients">
+        <li>2 cups shredded carrots</li>
+        <li>1 cup walnuts · 1 cup dates</li>
+        <li>3 tbsp oats · 2 tbsp shredded coconut · 1 tbsp chia seeds</li>
+        <li>1 tsp cinnamon · ½ tsp ground ginger · ¼ tsp nutmeg</li>
+      </ul>
+      <div class="recipe-section-label">Cashew Icing</div>
+      <ul class="recipe-ingredients">
+        <li>1 cup cashews (soaked in hot water 15 min)</li>
+        <li>½ cup coconut oil, melted</li>
+        <li>3 tbsp maple syrup · 1 tsp vanilla</li>
+        <li>1 lime, juiced · 2–3 tbsp warm water as needed</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Blend all cake ingredients until firm.</li>
+        <li>Roll into balls, freeze while making icing.</li>
+        <li>Blend all icing ingredients until smooth.</li>
+        <li>Coat truffles in icing, garnish with shredded carrots and chopped walnuts.</li>
+        <li>Freeze until set.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Tofu Chocolate Mousse -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🍫</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Dairy-Free Tofu Chocolate Mousse</div>
+        <div class="recipe-meta">Serves 4 · Blend & chill · You won't taste the tofu!</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Ingredients</div>
+      <ul class="recipe-ingredients">
+        <li>600g (24oz) silken tofu, drained</li>
+        <li>180g (6.3oz) cocoa powder</li>
+        <li>⅓ cup pure maple syrup</li>
+        <li>2 tbsp smooth peanut butter</li>
+        <li>1 tbsp vanilla extract</li>
+        <li>Pinch of salt</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Drain the tofu and add to a blender with cocoa powder, maple syrup, peanut butter, vanilla, and salt.</li>
+        <li>Blend on high for about 1 minute until completely smooth.</li>
+        <li>Pour into glasses or ramekins and refrigerate at least 2 hours.</li>
+        <li>Top with fresh strawberries and granola before serving.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Walnut Shrimp Sauce -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🍤</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Walnut Shrimp Sauce</div>
+        <div class="recipe-meta">Scaled for 3 lbs shrimp · Mix & done</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Ingredients</div>
+      <ul class="recipe-ingredients">
+        <li>5 oz (140g) mayonnaise</li>
+        <li>2.5 oz (70g) honey</li>
+        <li>2 tsp lemon juice</li>
+        <li>¼ tsp salt</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Combine all ingredients in a bowl.</li>
+        <li>Mix until smooth and well combined.</li>
+        <li>Toss with cooked walnut shrimp and serve immediately.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Avgolemono -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🍋</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Avgolemono (Chicken Lemon Egg Rice Soup)</div>
+        <div class="recipe-meta">Serves 8 · Stress-tested & scaled</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Broth & Chicken</div>
+      <ul class="recipe-ingredients">
+        <li>3 lbs bone-in, skin-on chicken thighs</li>
+        <li>10 cups chicken broth/stock</li>
+        <li>2 bay leaves · 1 tsp salt · ½ tsp white pepper</li>
+      </ul>
+      <div class="recipe-section-label">Rice</div>
+      <ul class="recipe-ingredients">
+        <li>1 cup long-grain white rice (uncooked)</li>
+      </ul>
+      <div class="recipe-section-label">Avgolemono</div>
+      <ul class="recipe-ingredients">
+        <li>4 whole eggs + 4 egg yolks</li>
+        <li>¾ cup fresh lemon juice (~4–5 lemons)</li>
+      </ul>
+      <div class="recipe-section-label">To Finish</div>
+      <ul class="recipe-ingredients">
+        <li>Salt & white pepper to taste</li>
+        <li>Fresh dill (generous handful)</li>
+        <li>Thin lemon slices for garnish</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Simmer chicken thighs in broth with bay leaves, salt, and pepper for 20–25 min. Remove chicken, strip meat, discard skin and bones. Skim fat, remove bay leaves.</li>
+        <li>Bring broth back to a gentle boil. Add rice and cook 12–15 min until just barely tender.</li>
+        <li>Whisk eggs + yolks until pale and frothy (~2 min). Whisk in ½ cup lemon juice first, taste, then add more.</li>
+        <li>Reduce heat to low. Ladle hot broth one ladle at a time into the egg bowl, whisking constantly — do this 6–8 times to temper.</li>
+        <li>Pour tempered mixture back into the pot slowly, stirring gently. Keep heat on low — steam but never bubble. Stir 3–4 min until thickened and creamy.</li>
+        <li>Add chicken back, stir in dill. Adjust salt, pepper, and lemon. Never boil after eggs are in!</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Sourdough Espresso Banana Bread -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🍌</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Fermented Sourdough Espresso Banana Bread</div>
+        <div class="recipe-meta">With Maple Mint Espresso Vanilla Glaze · 2-day recipe</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Day 1 — Fermentation Batter</div>
+      <ul class="recipe-ingredients">
+        <li>392g (~1½ cups) very ripe bananas, mashed</li>
+        <li>210g (~¾ cup) active sourdough starter</li>
+        <li>84g (~6 tbsp) neutral oil (olive, avocado, or coconut)</li>
+        <li>168g (~⅔ cup) Greek yogurt</li>
+        <li>6g (~1½ tsp) vanilla extract</li>
+        <li>336g (~2¾ cups) King Arthur bread flour</li>
+        <li>17g (~2 tbsp) instant espresso powder</li>
+      </ul>
+      <div class="recipe-section-label">Day 2 — Add In</div>
+      <ul class="recipe-ingredients">
+        <li>210g (~⅔ cup) maple syrup</li>
+        <li>3 large eggs (~140g)</li>
+        <li>8g (~2 tsp) baking powder · 4g (~¾ tsp) baking soda · 5g (~1 tsp) salt</li>
+        <li>4g (~1½ tsp) cinnamon</li>
+        <li>140g (~¾ cup) chocolate chips (optional)</li>
+      </ul>
+      <div class="recipe-section-label">Maple Mint Espresso Vanilla Glaze</div>
+      <ul class="recipe-ingredients">
+        <li>80g (~¼ cup) maple syrup</li>
+        <li>5g (~1 tsp) espresso powder dissolved in 25g (~2 tbsp) hot water, cooled</li>
+        <li>25–30g (~1 cup loosely packed) fresh mint leaves</li>
+        <li>12g (~2 tsp) vanilla bean paste</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li><strong>Day 1 evening:</strong> Mix bananas, starter, oil, yogurt, and vanilla. Add flour and espresso powder, mix until just combined. Cover and ferment at room temp 8–12 hours overnight.</li>
+        <li><strong>Day 2:</strong> Preheat oven to 350°F (175°C). Grease pan with coconut oil.</li>
+        <li>Whisk together maple syrup, eggs, baking powder, baking soda, salt, and cinnamon in a small bowl.</li>
+        <li>Gently fold the maple mixture into the fermented batter until just combined. Do not overmix. Fold in chocolate chips.</li>
+        <li>Bake 60–70 minutes until a toothpick comes out clean. Cool in pan 10 min, then transfer to a rack.</li>
+        <li><strong>Glaze:</strong> Blend all glaze ingredients until smooth. Pour over completely cooled loaf.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Orange Espresso GF Cookies -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🍊</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Orange Espresso Gluten-Free Cookies</div>
+        <div class="recipe-meta">Almond flour · GF · Makes ~20 cookies</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Ingredients</div>
+      <ul class="recipe-ingredients">
+        <li>200–250g almond flour</li>
+        <li>100g coconut sugar (or brown sugar)</li>
+        <li>50g granulated sugar</li>
+        <li>5g (1 tsp) baking soda · 1.5g (¼ tsp) salt</li>
+        <li>12–18g (2–3 tbsp) espresso powder</li>
+        <li>Zest of 1 large orange</li>
+        <li>75–100g melted coconut oil (or butter)</li>
+        <li>1 large egg (~50g)</li>
+        <li>5–10ml vanilla extract · 2.5–5ml almond extract</li>
+        <li>170g dark or milk chocolate chips</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Preheat oven to 350°F (175°C). Line a baking sheet with parchment.</li>
+        <li>Whisk together almond flour, sugars, baking soda, salt, espresso powder, and orange zest in a large bowl.</li>
+        <li>Mix melted coconut oil, egg, vanilla, and almond extract in a separate bowl.</li>
+        <li>Pour wet into dry and stir until combined. Fold in chocolate chips.</li>
+        <li>Scoop ~20g balls onto sheet, spacing 5cm apart. Flatten slightly. Optional: freeze dough balls 7+ hours before baking.</li>
+        <li>Bake 10–12 min until edges are golden. Centers will look underdone — that's perfect! Cool on sheet 5 min before moving.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Coconut Lime Basil Panna Cotta -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🥥</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Two-Layer Coconut Lime Basil Panna Cotta</div>
+        <div class="recipe-meta">Serves 4 · Make ahead · Vegan</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Panna Cotta</div>
+      <ul class="recipe-ingredients">
+        <li>800g (2 cans) full-fat coconut milk</li>
+        <li>60g maple syrup</li>
+        <li>Zest of 2 limes · 30g fresh lime juice (~1 lime)</li>
+        <li>14g unflavored gelatin powder (2 packets)</li>
+        <li>20 fresh basil leaves (10 for base, 10 for green layer)</li>
+        <li>Pinch of salt (~1g)</li>
+      </ul>
+      <div class="recipe-section-label">Basil-Lime Berry Syrup</div>
+      <ul class="recipe-ingredients">
+        <li>60g water · 25g maple syrup · 60g lemon juice</li>
+        <li>1 cup frozen blueberries and blackberries</li>
+        <li>10–12 fresh basil leaves</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Pour 45g cold water in a bowl, sprinkle gelatin over it. Let bloom 5 min.</li>
+        <li>Gently heat coconut milk, maple syrup, lime zest, and 8–10 bruised basil leaves until warm (not boiling). Remove from heat, steep 10 min, then remove basil.</li>
+        <li>Add bloomed gelatin and whisk until dissolved. Stir in lime juice.</li>
+        <li>Reserve ~210g of the mixture. Add 10 fresh basil leaves to it and blend smooth with an immersion blender.</li>
+        <li>Pour plain mixture into 4 ramekins (~130g each). Refrigerate 45 min until just set.</li>
+        <li>Gently pour the basil layer on top (~50g each). Refrigerate 2+ hours.</li>
+        <li><strong>Syrup:</strong> Simmer all syrup ingredients 20 min, remove leaves, cool. Drizzle over servings and top with lime zest.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Orange Olive Oil Cake -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🍰</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Orange Olive Oil Cake</div>
+        <div class="recipe-meta">Moist & fragrant · Serve with Greek yogurt</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Ingredients</div>
+      <ul class="recipe-ingredients">
+        <li>200g bread flour · 8g (2 tsp) baking powder · 1.5g (¼ tsp) salt</li>
+        <li>100g granulated sugar (80g in batter + 20g with eggs)</li>
+        <li>3 large eggs (~150g)</li>
+        <li>120ml (100g) olive oil</li>
+        <li>120ml blended orange, water & lemon juice (~2 oranges)</li>
+        <li>Zest of 2 oranges · vanilla · 20g cinnamon</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Preheat oven to 350°F. Grease pan with coconut oil.</li>
+        <li>Combine flour, baking powder, 80g sugar, cinnamon, salt, and orange zest in a bowl. Add olive oil.</li>
+        <li>Coarsely chop oranges and blend with a splash of water and lemon juice until smooth. Add 120ml to the batter. Set rest aside for topping.</li>
+        <li>Beat 20g sugar with 3 eggs (use blender with leftover orange bits). Gently fold into batter until just combined.</li>
+        <li>Pour into pan and bake ~42 min until a toothpick comes out clean.</li>
+        <li>Cool 10 min, turn out onto a rack. Top with Greek yogurt and the thick orange juice blend.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- NY Style Bagels -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🥯</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">NY-Style Bagels</div>
+        <div class="recipe-meta">Makes 6 big bagels · <a href="https://www.sophisticatedgourmet.com/2009/10/new-york-style-bagel-recipe/" target="_blank" style="color:var(--orange);text-decoration:none;">Base recipe ↗</a> with Eli's notes</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Ingredients</div>
+      <ul class="recipe-ingredients">
+        <li>440g bread flour (plus more for kneading)</li>
+        <li>6g yeast (active dry or instant — both work)</li>
+        <li>6g salt · 15g sugar</li>
+        <li>300ml warm water (not hot, not cold)</li>
+        <li>Molasses, honey, or sugar for boiling water</li>
+        <li>Toppings of choice</li>
+      </ul>
+      <div class="recipe-section-label">Eli's Notes</div>
+      <ul class="recipe-ingredients">
+        <li>Just throw everything in one bowl — no need to bloom yeast separately if it's fresh</li>
+        <li>Dough should be soft and pliable, NOT firm — fluffy bagels = softer dough</li>
+        <li>Use very lightly oiled bowl — too much oil makes shaping harder</li>
+        <li>Make 6 bagels, not 8 — they come out much better sized</li>
+        <li>Shape by making a smooth ball and poking your finger through the middle — don't roll logs</li>
+        <li>Add molasses to boiling water for a beautiful darker color</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Mix flour, yeast, salt, and sugar in a bowl. Add warm water and stir until mostly incorporated.</li>
+        <li>Knead in the bowl, adding flour a little at a time until dough is soft, pliable, and just not sticky — about 3–5 min once it comes together.</li>
+        <li>Place in a very lightly oiled bowl, cover with a damp towel, and let rise in a warm spot (oven with light on works great).</li>
+        <li>Divide into 6 pieces. Shape each into a smooth ball, then poke your finger through the middle to form the bagel hole.</li>
+        <li>Boil each bagel in water with molasses/honey/sugar, ~1 min per side.</li>
+        <li>Add toppings right after boiling. Bake on parchment-lined sheet (lightly oiled if possible) until golden.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Purple Potato Cake -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🥔</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Purple Potato Cakes with Kale, Eggs & Mustard Yogurt</div>
+        <div class="recipe-meta">Cozy vegetarian dinner · Serves 2–3</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Crispy Potato Cakes</div>
+      <ul class="recipe-ingredients">
+        <li>500g (~1 lb) purple potatoes</li>
+        <li>30g (¼ cup) grated Parmesan</li>
+        <li>1 egg · 1 tbsp fresh thyme leaves</li>
+        <li>Salt, pepper, garlic powder, smoked paprika</li>
+        <li>2 tbsp olive oil for frying · flaky salt to finish</li>
+      </ul>
+      <div class="recipe-section-label">Warm Kale & Apple</div>
+      <ul class="recipe-ingredients">
+        <li>200g (7oz) kale, chopped · 2 garlic cloves, minced</li>
+        <li>180g (6oz) apple, diced · 30g (1oz) grated Parmesan</li>
+        <li>2 tbsp olive oil · salt, pepper, red pepper flakes</li>
+      </ul>
+      <div class="recipe-section-label">Mustard-Dill Yogurt Sauce</div>
+      <ul class="recipe-ingredients">
+        <li>120g (½ cup) plain yogurt</li>
+        <li>1–2 tsp Dijon or whole grain mustard</li>
+        <li>2 tbsp fresh dill · 1 minced garlic clove · squeeze of lemon</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Boil potatoes ~15 min until just tender. Cool slightly, then grate or roughly mash. Mix in Parmesan, egg, thyme, and seasoning. Form into patties and fry in olive oil 3–4 min per side until deeply golden. Finish with flaky salt.</li>
+        <li>Sauté garlic in olive oil 1 min. Add kale with a splash of water and cook 5–7 min. In the last minute, add diced apple. Season and plate, top with Parmesan.</li>
+        <li>Soft-boil eggs 6–7 min, ice bath, peel, and halve.</li>
+        <li>Gently warm yogurt sauce over very low heat — don't let it simmer. Plate everything and drizzle sauce generously over top.</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggleRecipe(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.recipe-toggle');
+    body.classList.toggle('open');
+    toggle.classList.toggle('open');
+  }
+
+  function toggleSection(btn) {
+    const body = btn.closest('.section').querySelector('.section-body');
+    body.classList.toggle('open');
+    btn.textContent = body.classList.contains('open') ? 'Hide' : 'Show';
+  }
+</script>
+</div>
+<footer>Made with love by Lydia 🤍<br><span style="font-size:11px;">Some links are affiliate links — I may earn a small commission at no cost to you.</span></footer>
+<script>
+  function toggleRecipe(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector(".recipe-toggle");
+    body.classList.toggle("open");
+    toggle.classList.toggle("open");
+  }
+</script>
+</body>
+</html>
