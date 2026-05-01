@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Boulder Family Day — May 2, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sage:#7a9e7e;--sage-light:#a8c5ac;--rust:#b5552a;--rust-light:#d4794d;
+  --ink:#2c2416;--muted:#8a7f6e;--gold:#c9a84c;--gold-light:#e8d5a0;
+  --cream:#faf8f4;--warm:#f0ebe0;--border:rgba(44,36,22,0.12);--warn:#7a4a1e;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;line-height:1.6}
+
+/* HERO */
+.hero{background:var(--ink);padding:3rem 1.5rem 2.5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse at 25% 60%,rgba(122,158,126,0.22),transparent 55%),
+  radial-gradient(ellipse at 75% 40%,rgba(181,85,42,0.18),transparent 55%),
+  radial-gradient(ellipse at 50% 100%,rgba(201,168,76,0.1),transparent 50%)}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--sage-light);letter-spacing:0.1em;margin-bottom:0.6rem;position:relative}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,7vw,3.6rem);font-weight:500;color:#faf8f4;line-height:1.05;position:relative}
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:13px;color:rgba(250,248,244,0.45);margin-top:0.8rem;letter-spacing:0.05em;position:relative}
+.hero-hearts{font-size:18px;margin-top:1rem;position:relative;opacity:0.6}
+
+/* PROGRESS */
+.pbar{height:3px;background:var(--warm);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,0.06)}
+.pfill{height:100%;background:linear-gradient(90deg,var(--sage),var(--gold),var(--rust));width:0%;transition:width 0.25s ease}
+
+/* TIMELINE */
+.timeline{padding:2rem 1rem 4rem;max-width:740px;margin:0 auto}
+.stop{display:grid;grid-template-columns:88px 1fr;gap:0 1rem;position:relative}
+.stop::before{content:'';position:absolute;left:95px;top:36px;bottom:-1px;width:1px;background:var(--border)}
+.stop:last-child::before{display:none}
+.time-col{padding-top:1.3rem;text-align:right}
+.tbadge{display:inline-block;font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0.04em;white-space:nowrap}
+.travel{display:grid;grid-template-columns:88px 1fr;gap:0 1rem;padding:0.4rem 0;align-items:center}
+.tline{display:flex;align-items:flex-start;gap:7px;padding-left:1rem;font-size:12px;color:var(--muted);line-height:1.5}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0;margin-top:5px}
+
+/* CARD */
+.card{background:#fff;border:0.5px solid var(--border);border-radius:18px;padding:1.25rem 1.3rem;margin-bottom:0;box-shadow:0 2px 16px rgba(44,36,22,0.04)}
+.ch{display:flex;align-items:flex-start;gap:10px;margin-bottom:0.75rem}
+.ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;margin-top:2px}
+.ig{background:#eaf3de}.ib{background:#e6f1fb}.ia{background:#faeeda}
+.is{background:rgba(122,158,126,0.13)}.ir{background:rgba(181,85,42,0.09)}.ik{background:rgba(44,36,22,0.05)}
+.ct{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;line-height:1.2;color:var(--ink)}
+.cs{font-size:11.5px;color:var(--muted);margin-top:2px}
+.desc{font-size:13.5px;line-height:1.7;color:#4a4030;margin-bottom:0.75rem}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:0.75rem}
+.tag{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
+.ts{background:rgba(122,158,126,0.12);color:#3b6d11}
+.tr{background:rgba(181,85,42,0.1);color:#993c1d}
+.tg{background:rgba(201,168,76,0.14);color:#854f0b}
+.tb{background:#e6f1fb;color:#0c447c}
+.tw{background:rgba(122,74,30,0.1);color:#7a4a1e}
+.sl{font-size:10px;font-weight:500;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:0.35rem;margin-top:0.75rem}
+.rl{list-style:none;font-size:13px;color:#4a4030;line-height:1.8}
+.rl li::before{content:'→ ';color:var(--sage)}
+
+/* PARKING */
+.parking-box{background:rgba(201,168,76,0.06);border:0.5px solid rgba(201,168,76,0.35);border-radius:11px;padding:0.75rem 0.9rem;margin-top:0.75rem}
+.parking-header{display:flex;align-items:center;gap:6px;margin-bottom:0.45rem}
+.parking-title{font-size:10px;font-weight:500;color:#854f0b;letter-spacing:0.08em;text-transform:uppercase}
+.parking-cost{font-size:11px;font-weight:500;padding:2px 9px;border-radius:10px;margin-left:auto}
+.cost-free{background:rgba(59,109,17,0.12);color:#3b6d11}
+.cost-paid{background:rgba(122,74,30,0.12);color:#7a4a1e}
+.parking-text{font-size:13px;line-height:1.65;color:#4a4030}
+
+/* BUTTONS */
+.btn-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:0.6rem}
+.pill-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;border-radius:14px;padding:5px 11px;text-decoration:none;transition:background 0.15s,transform 0.1s;border:0.5px solid;cursor:pointer}
+.pill-btn:active{transform:scale(0.97)}
+.btn-green{color:var(--sage);border-color:var(--sage-light);background:rgba(122,158,126,0.06)}
+.btn-green:hover{background:rgba(122,158,126,0.14)}
+.btn-ink{color:var(--ink);border-color:rgba(44,36,22,0.25);background:rgba(44,36,22,0.03)}
+.btn-ink:hover{background:rgba(44,36,22,0.08)}
+.btn-gold{color:#854f0b;border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.07)}
+.btn-gold:hover{background:rgba(201,168,76,0.14)}
+
+/* QUESTIONS */
+.qtoggle{width:100%;text-align:left;background:rgba(201,168,76,0.07);border:0.5px solid rgba(201,168,76,0.3);border-radius:10px;padding:0.65rem 1rem;font-size:13px;font-weight:500;color:#854f0b;cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem;transition:background 0.15s;font-family:'DM Sans',sans-serif}
+.qtoggle:hover{background:rgba(201,168,76,0.14)}
+.qtoggle .arr{transition:transform 0.28s;font-size:10px;flex-shrink:0}
+.qtoggle.open .arr{transform:rotate(180deg)}
+.qpanel{display:none;padding:0.75rem 0 0}
+.qpanel.open{display:block}
+.qcard{background:rgba(201,168,76,0.05);border-left:2px solid var(--gold);border-radius:0 9px 9px 0;padding:0.6rem 0.8rem;margin-bottom:0.5rem;line-height:1.65;color:var(--ink)}
+.qcard:last-child{margin-bottom:0}
+.qtype{font-family:'DM Sans',sans-serif;font-style:normal;font-size:9.5px;font-weight:500;color:var(--gold);letter-spacing:0.09em;text-transform:uppercase;display:block;margin-bottom:3px}
+.qtext{font-family:'Cormorant Garamond',serif;font-size:15.5px;font-style:italic}
+
+/* WARN */
+.warn-box{background:rgba(122,74,30,0.06);border:0.5px solid rgba(122,74,30,0.25);border-radius:9px;padding:0.55rem 0.8rem;font-size:12.5px;color:var(--warn);line-height:1.6;margin-top:0.6rem}
+
+/* DINNER COMPARE */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:0.75rem}
+@media(max-width:500px){.compare{grid-template-columns:1fr}}
+.opt{border:0.5px solid var(--border);border-radius:13px;padding:0.85rem;background:#fff}
+.opt.winner{border:1.5px solid var(--sage);background:rgba(122,158,126,0.04)}
+.opt-label{font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px;color:var(--muted)}
+.winner .opt-label{color:var(--sage)}
+.opt-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:5px}
+.opt-row{font-size:12px;line-height:1.7;color:#4a4030;margin-bottom:2px}
+.opt-row strong{font-weight:500;color:var(--ink)}
+.oil-pill{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;margin-top:3px}
+.oil-ok{background:rgba(59,109,17,0.1);color:#3b6d11}
+
+/* FOOTER */
+.footer{text-align:center;padding:2rem 1rem 3rem;font-size:12px;color:var(--muted)}
+.footer-hearts{font-size:20px;margin-bottom:0.5rem}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">Saturday, May 2, 2026</div>
+  <div class="hero-title">Our <em>Boulder</em><br>Family Day</div>
+  <div class="hero-sub">Depart 8:45 AM &nbsp;·&nbsp; Aurora → Boulder → Home &nbsp;·&nbsp; Back ~6:15 PM</div>
+  <div class="hero-hearts">✦ ✦ ✦</div>
+</div>
+
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+
+<div class="timeline">
+
+<!-- ══ STOP 1 ══ -->
+<div class="stop">
+  <div class="time-col"><span class="tbadge">8:45 AM</span></div>
+  <div><div class="card">
+    <div class="ch"><div class="ico ik">🚗</div><div>
+      <div class="ct">Depart — Hit the road!</div>
+      <div class="cs">Havana & Mexico Ave, Aurora → Boulder Farmers Market</div>
+    </div></div>
+    <p class="desc">Load up while the babies are fresh. Grab coffee to go and head west on US-36. The mountains start appearing through the windshield before you even realize it.</p>
+    <div class="tags">
+      <span class="tag ts">~45 min drive</span>
+      <span class="tag tb">US-36 West</span>
+      <span class="tag tr">Pack: stroller, carrier, sunscreen, snacks, blanket</span>
+    </div>
+    <div class="btn-row">
+      <a class="pill-btn btn-green" href="https://www.google.com/maps/dir/Havana+St+%26+Mexico+Ave,+Aurora,+CO/13th+St+%26+Canyon+Blvd,+Boulder,+CO" target="_blank">📍 Directions on Google Maps</a>
+    </div>
+    <button class="qtoggle" onclick="tog(this)">💬 Drive conversation starters <span class="arr">▼</span></button>
+    <div class="qpanel">
+      <div class="qcard"><span class="qtype">Intentional</span><span class="qtext">What's one thing you're hoping to feel today — not do, but actually feel?</span></div>
+      <div class="qcard"><span class="qtype">Playful</span><span class="qtext">If this were a movie, what would the opening credits song be? Describe the vibe of today in one song.</span></div>
+      <div class="qcard"><span class="qtype">Romantic</span><span class="qtext">What's something small I do that you hope our kids inherit?</span></div>
+      <div class="qcard"><span class="qtype">Deep</span><span class="qtext">Is there a version of yourself — before marriage, before kids — that you grieve a little? What do you miss, and what has replaced it that you didn't expect to love?</span></div>
+      <div class="qcard"><span class="qtype">Uncomfortable / Honest</span><span class="qtext">When was the last time you felt truly alone in this marriage — not physically, but emotionally? What was happening?</span></div>
+      <div class="qcard"><span class="qtype">Visionary</span><span class="qtext">If money and logistics weren't real things — if we could just decide and it would happen — where would we actually live? What would our days look like?</span></div>
+      <div class="qcard"><span class="qtype">Orthodox Christian</span><span class="qtext">Is there a sin pattern in your own life right now that you feel God is asking you to hand over — one you haven't fully surrendered?</span></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="travel"><div></div><div class="tline"><div class="tdot"></div>Arrive ~9:30 AM · All downtown city garages FREE all day Saturday · No registration needed</div></div>
+
+<!-- ══ STOP 2 ══ -->
+<div class="stop">
+  <div class="time-col"><span class="tbadge">9:30 AM</span></div>
+  <div><div class="card">
+    <div class="ch"><div class="ico ig">🌿</div><div>
+      <div class="ct">Boulder Farmers Market</div>
+      <div class="cs">13th St & Canyon Blvd · Open 8 AM – 2 PM Saturdays only</div>
+    </div></div>
+    <p class="desc">Open air, local everything, live music. Graze for breakfast — regenerative meat, local eggs, baked goods. Let babies sit in the grass near Boulder Creek while you eat. Load up on honey and artisan cheese to take home.</p>
+    <div class="tags">
+      <span class="tag ts">1.5 hrs</span>
+      <span class="tag tg">Regenerative food</span>
+      <span class="tag tb">Live music</span>
+    </div>
+    <div class="sl">Don't miss</div>
+    <ul class="rl" style="margin-bottom:0.75rem">
+      <li>Food court + live musicians — put the blanket down in the grass</li>
+      <li>Babies near Boulder Creek while you eat</li>
+      <li>Colorado honey, artisan cheese, local eggs to take home</li>
+    </ul>
+    <div class="parking-box">
+      <div class="parking-header"><span>🅿️</span><span class="parking-title">Parking</span><span class="parking-cost cost-free">FREE all day Saturday</span></div>
+      <p class="parking-text"><strong>Best option: 11th & Walnut Garage (Randolph)</strong> — 2 min walk to 13th St. Drive in, drive out, $0. No registration, no ticket, no gate. All 5 city garages are completely free Saturdays.</p>
+      <div class="btn-row">
+        <a class="pill-btn btn-gold" href="https://www.google.com/maps/place/11th+%26+Walnut+Parking+Garage,+1101+Walnut+St,+Boulder,+CO+80302" target="_blank">📍 11th & Walnut Garage</a>
+        <a class="pill-btn btn-gold" href="https://www.google.com/maps/place/14th+%26+Walnut+Parking+Garage,+Boulder,+CO" target="_blank">📍 14th & Walnut Garage</a>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="pill-btn btn-green" href="https://www.google.com/maps/place/Boulder+Farmers+Market,+13th+St,+Boulder,+CO+80302" target="_blank">📍 Farmers Market on Maps</a>
+    </div>
+    <button class="qtoggle" onclick="tog(this)">💬 Couples questions <span class="arr">▼</span></button>
+    <div class="qpanel">
+      <div class="qcard"><span class="qtype">Hygge</span><span class="qtext">If we could eat like this every day — local, unhurried, outside — what would have to change in our life to make that real?</span></div>
+      <div class="qcard"><span class="qtype">Orthodox Christian</span><span class="qtext">What does "eating well" mean to you spiritually? Do you feel how we eat is connected to our faith at all?</span></div>
+      <div class="qcard"><span class="qtype">Deep</span><span class="qtext">Watching the kids right now — what worries you about who they might become? What fills you with hope?</span></div>
+      <div class="qcard"><span class="qtype">Fun</span><span class="qtext">If you had to turn one vendor here into a monthly subscription box that showed up at our door, which one?</span></div>
+      <div class="qcard"><span class="qtype">Uncomfortable</span><span class="qtext">Is there something about the way we're raising our kids that you privately disagree with but haven't brought up? What is it?</span></div>
+      <div class="qcard"><span class="qtype">Tender</span><span class="qtext">When did you first know — really know, in your gut — that you wanted to have children with me specifically?</span></div>
+      <div class="qcard"><span class="qtype">Reflective</span><span class="qtext">What's something about your own childhood that you're actively trying to give our kids? What's something you're actively trying to protect them from?</span></div>
+      <div class="qcard"><span class="qtype">Visionary</span><span class="qtext">What does a deeply good life look like to you? Not successful — not impressive — just genuinely good. Are we on that path?</span></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="travel"><div></div><div class="tline"><div class="tdot"></div>5 min walk west, or 3 min drive · Stay in same garage or park at Eben Fine trailhead lot</div></div>
+
+<!-- ══ STOP 3 ══ -->
+<div class="stop">
+  <div class="time-col"><span class="tbadge">11:00 AM</span></div>
+  <div><div class="card">
+    <div class="ch"><div class="ico is">🚶</div><div>
+      <div class="ct">Boulder Creek Path</div>
+      <div class="cs">Eben G. Fine Park · 101 Arapahoe Ave</div>
+    </div></div>
+    <p class="desc">Paved, flat, stroller-friendly. The creek rushes right beside you the whole way. Ducks, cottonwoods, shade, mountain views. Turn around whenever — no pressure, no destination. Restrooms at the park.</p>
+    <div class="tags">
+      <span class="tag ts">~1.25 hrs</span>
+      <span class="tag tb">Stroller-friendly · Flat & paved</span>
+      <span class="tag tg">Restrooms on site</span>
+    </div>
+    <ul class="rl" style="margin-bottom:0.75rem">
+      <li>Let babies stand at the water's edge — moving water is pure magic for them</li>
+      <li>Watch for ducks · Name every cloud you see together</li>
+      <li>Baby carrier for when the toddler inevitably asks to be held</li>
+    </ul>
+    <div class="parking-box">
+      <div class="parking-header"><span>🅿️</span><span class="parking-title">Parking</span><span class="parking-cost cost-free">FREE Saturdays</span></div>
+      <p class="parking-text"><strong>Option A (easiest):</strong> Stay in the same downtown garage from the market — walk 10 min west along Canyon Blvd to Eben Fine Park.<br><br><strong>Option B:</strong> Small trailhead surface lot on Arapahoe Ave — surface lots near Boulder Public Library are free Saturdays. Confirm $0 at the pay station when you pull in.</p>
+      <div class="btn-row">
+        <a class="pill-btn btn-gold" href="https://www.google.com/maps/place/Eben+G.+Fine+Park,+101+Arapahoe+Ave,+Boulder,+CO+80302" target="_blank">📍 Eben Fine Park Lot</a>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="pill-btn btn-green" href="https://www.google.com/maps/place/Eben+G.+Fine+Park,+101+Arapahoe+Ave,+Boulder,+CO+80302" target="_blank">📍 Eben Fine Park on Maps</a>
+    </div>
+    <button class="qtoggle" onclick="tog(this)">💬 Couples questions <span class="arr">▼</span></button>
+    <div class="qpanel">
+      <div class="qcard"><span class="qtype">Hygge / Deep</span><span class="qtext">When do you feel most at peace? Not happy — specifically at peace. What does that feel like in your body, and when did you last feel it?</span></div>
+      <div class="qcard"><span class="qtype">Romantic</span><span class="qtext">Is there something you've forgiven me for that you've never actually said you forgave me for?</span></div>
+      <div class="qcard"><span class="qtype">Intentional</span><span class="qtext">What's something beautiful about our life together that you've never found the right moment to say out loud?</span></div>
+      <div class="qcard"><span class="qtype">Spicy</span><span class="qtext">Where is the most unexpected place you've ever wanted me?</span></div>
+      <div class="qcard"><span class="qtype">Uncomfortable</span><span class="qtext">What's something I do — maybe without realizing it — that makes you feel small, or unseen, or like you have to perform? I want to actually know.</span></div>
+      <div class="qcard"><span class="qtype">Vulnerable</span><span class="qtext">What do you most need me to understand about what this season of life is like for you — the babies, the exhaustion, all of it — that you haven't been able to articulate yet?</span></div>
+      <div class="qcard"><span class="qtype">Deep</span><span class="qtext">What's a version of yourself you've been putting off becoming — some growth, some healing, some becoming — that you know is waiting for you on the other side of this season?</span></div>
+      <div class="qcard"><span class="qtype">Tender</span><span class="qtext">When you watch me with our kids, what do you see in me that you love most? What worries you most?</span></div>
+      <div class="qcard"><span class="qtype">Orthodox Christian</span><span class="qtext">Is there a way you feel spiritually dry right now — like something in your interior life has gone quiet? What do you think caused it?</span></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="travel"><div></div><div class="tline"><div class="tdot"></div>~8 min drive east on Pearl St · 2805 Pearl St Suite 5B</div></div>
+
+<!-- ══ STOP 4 ══ -->
+<div class="stop">
+  <div class="time-col"><span class="tbadge">12:30 PM</span></div>
+  <div><div class="card">
+    <div class="ch"><div class="ico ia">🍔</div><div>
+      <div class="ct">Lunch — Wild Pastures Burger Co.</div>
+      <div class="cs">2805 Pearl St Suite 5B · (720) 242-7494 · Open 11 AM–9 PM</div>
+    </div></div>
+    <p class="desc">Seed-oil-free by design. 100% grass-fed regenerative beef, tallow fries, house-made avocado oil sauces. Zero seed oils, zero refined sugar, no GMOs. Fast casual — food comes quick, which the babies will approve of.</p>
+    <div class="tags">
+      <span class="tag ts">~1 hr</span>
+      <span class="tag tg">100% grass-fed tallow fries</span>
+      <span class="tag tr">Zero seed oils — verified</span>
+      <span class="tag tb">GF buns available</span>
+    </div>
+    <div class="sl">Order this</div>
+    <ul class="rl" style="margin-bottom:0.75rem">
+      <li>Standard Wild Beef Burger — chimichurri aioli on the side</li>
+      <li>Organic Tallow Fries — dedicated fryer, no cross-contamination</li>
+      <li>Bone broth — turmeric ginger is the crowd favorite</li>
+      <li>Strawberry milkshake — real ingredients, lower sugar</li>
+    </ul>
+    <div class="parking-box">
+      <div class="parking-header"><span>🅿️</span><span class="parking-title">Parking</span><span class="parking-cost cost-free">FREE all day Saturday</span></div>
+      <p class="parking-text"><strong>15th & Pearl Garage</strong> — 3 min walk to Wild Pastures. Or stay in the same downtown garage from this morning. All city garages free, no time limit on Saturdays.</p>
+      <div class="btn-row">
+        <a class="pill-btn btn-gold" href="https://www.google.com/maps/place/15th+%26+Pearl+Parking+Garage,+1500+Pearl+St,+Boulder,+CO" target="_blank">📍 15th & Pearl Garage</a>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="pill-btn btn-green" href="https://www.google.com/maps/place/Wild+Pastures+Burger+Company,+2805+Pearl+St,+Boulder,+CO" target="_blank">📍 Wild Pastures on Maps</a>
+      <a class="pill-btn btn-ink" href="https://order.toasttab.com/online/wild-pastures-burger-2805-pearl-st-ste-5b" target="_blank">🍔 Official Menu & Order</a>
+    </div>
+    <button class="qtoggle" onclick="tog(this)">💬 Couples questions <span class="arr">▼</span></button>
+    <div class="qpanel">
+      <div class="qcard"><span class="qtype">Fun</span><span class="qtext">You can only eat one meal for the rest of your life — what is it? Mine is probably this.</span></div>
+      <div class="qcard"><span class="qtype">Intentional</span><span class="qtext">What's a value we talk about a lot — clean food, intentional living, faith — that you feel we're actually living? What's one we aren't living yet?</span></div>
+      <div class="qcard"><span class="qtype">Deep</span><span class="qtext">What's something you used to believe about yourself that you've quietly let go of? Do you miss it, or are you relieved?</span></div>
+      <div class="qcard"><span class="qtype">Uncomfortable</span><span class="qtext">What's something we spend money on that you secretly resent or wish we didn't? What's something we don't spend money on that you quietly wish we would?</span></div>
+      <div class="qcard"><span class="qtype">Vulnerable</span><span class="qtext">What's a dream you had before kids that you've never fully let yourself grieve? Something that quietly aches a little?</span></div>
+      <div class="qcard"><span class="qtype">Reflective</span><span class="qtext">What has becoming a parent taught you about your own parents — good or painful — that you didn't expect?</span></div>
+      <div class="qcard"><span class="qtype">Orthodox Christian</span><span class="qtext">Is there a theological question you've been carrying that you haven't said out loud because it feels too big, or too scary, or too disloyal to ask?</span></div>
+      <div class="qcard"><span class="qtype">Romantic</span><span class="qtext">What's something about our marriage right now — this exact season — that you hope we remember fondly in 20 years, even though it's hard?</span></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="travel"><div></div><div class="tline"><div class="tdot"></div>~12 min drive west on Baseline Rd → Chautauqua Park, 900 Baseline Rd</div></div>
+
+<!-- ══ STOP 5 ══ -->
+<div class="stop">
+  <div class="time-col"><span class="tbadge">2:00 PM</span></div>
+  <div><div class="card">
+    <div class="ch"><div class="ico ir">🏔️</div><div>
+      <div class="ct">Chautauqua Park & The Flatirons</div>
+      <div class="cs">900 Baseline Rd, Boulder · 2 glorious hours</div>
+    </div></div>
+    <p class="desc">The Flatirons rise directly in front of you. Enormous open meadow. General Store has ice cream. The toddler runs free, you get the view, and he gets the mountains calling his name. This is the heart of the day.</p>
+    <div class="tags">
+      <span class="tag ts">2 hrs</span>
+      <span class="tag tg">Most iconic spot in Colorado</span>
+      <span class="tag tw">Paid parking Saturdays — $2.50/hr</span>
+    </div>
+    <div class="sl">For your 21-month-old</div>
+    <ul class="rl">
+      <li>Bubbles in the meadow — they'll chase them for 20 solid minutes</li>
+      <li>Walk barefoot in the grass — pure sensory bliss</li>
+      <li>Find a stick. This becomes their most prized possession for an hour.</li>
+      <li>Stack rocks near the trailhead — toddlers are obsessed with this</li>
+      <li>Ice cream cone at the General Store as the grand finale 🍦</li>
+    </ul>
+    <div class="sl">For the adventurous husband</div>
+    <ul class="rl" style="margin-bottom:0.75rem">
+      <li>Scramble base of First Flatiron — 20-30 min, no gear needed, iconic</li>
+      <li>Royal Arch Trail: steep, rocky, natural arch + waterfall at the top</li>
+      <li>Bluebell-Baird Trail: climbs fast with insane exposure views</li>
+    </ul>
+    <div class="parking-box">
+      <div class="parking-header"><span>🅿️</span><span class="parking-title">Parking — Chautauqua</span><span class="parking-cost cost-paid">$2.50/hr on Saturdays</span></div>
+      <p class="parking-text"><strong>Important: May 2 is before Memorial Day (May 23)</strong> — the free Park-to-Park shuttle has NOT started yet. Drive and park at the park.<br><br>Paid parking at the <strong>green lots on Baseline Rd</strong> or the <strong>Ranger Cottage lot</strong>. 2 hours = <strong>$5 total</strong>. Pay via ParkMobile app or the pay station on Baseline.<br><br>💡 Download <strong>ParkMobile</strong> before you leave home so you're not fumbling with two babies.</p>
+      <div class="btn-row">
+        <a class="pill-btn btn-gold" href="https://www.google.com/maps/place/Chautauqua+Park,+900+Baseline+Rd,+Boulder,+CO+80302" target="_blank">📍 Chautauqua Parking</a>
+        <a class="pill-btn btn-ink" href="https://www.parkmobile.io" target="_blank">📱 ParkMobile App</a>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="pill-btn btn-green" href="https://www.google.com/maps/place/Chautauqua+Park,+900+Baseline+Rd,+Boulder,+CO+80302" target="_blank">📍 Chautauqua on Maps</a>
+    </div>
+    <button class="qtoggle" onclick="tog(this)">💬 Couples questions <span class="arr">▼</span></button>
+    <div class="qpanel">
+      <div class="qcard"><span class="qtype">Deep / Hygge</span><span class="qtext">When you imagine us at 70 — what does a good day look like? Who are we to each other by then?</span></div>
+      <div class="qcard"><span class="qtype">Intentional</span><span class="qtext">When do you feel most like yourself — not who you are to me, or to the kids, or to God, or anyone — just the most fundamental version of you? Does that person get enough time?</span></div>
+      <div class="qcard"><span class="qtype">Orthodox Christian</span><span class="qtext">Is there a way you feel God has changed you since we became parents — something that surprised you about who He's making you into?</span></div>
+      <div class="qcard"><span class="qtype">Vulnerable</span><span class="qtext">What's a fear you have about who our kids might become that you've never said out loud?</span></div>
+      <div class="qcard"><span class="qtype">Romantic</span><span class="qtext">What's something you're quietly proud of that you feel like you can't really brag about?</span></div>
+      <div class="qcard"><span class="qtype">Spicy</span><span class="qtext">When was the last time you really wanted me and didn't say anything? What held you back?</span></div>
+      <div class="qcard"><span class="qtype">Uncomfortable</span><span class="qtext">Is there a way you feel like I don't really see you right now — something about who you are or what you're carrying that you wish I'd just notice without you having to ask?</span></div>
+      <div class="qcard"><span class="qtype">Beautiful / Tender</span><span class="qtext">Standing here with all of this — what's one thing about this moment that you want to photograph with your memory instead of your phone?</span></div>
+      <div class="qcard"><span class="qtype">Deep / Uncomfortable</span><span class="qtext">What's the hardest thing about being married to me? Not a complaint — I genuinely want to know. What costs you the most?</span></div>
+      <div class="qcard"><span class="qtype">Visionary</span><span class="qtext">If you knew our kids would turn out exactly like us — exactly like the people we are right now — would that be okay? What would you want to change in yourself before they arrive there?</span></div>
+      <div class="qcard"><span class="qtype">Falling in love again</span><span class="qtext">Tell me something about who I am that you find beautiful — not physical, not functional — just something true about my soul that you'd miss if I were gone.</span></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="travel"><div></div><div class="tline"><div class="tdot"></div>~8 min drive from Chautauqua → decide between dinner options below before you leave the park</div></div>
+
+<!-- ══ STOP 6 ══ -->
+<div class="stop">
+  <div class="time-col"><span class="tbadge">4:30 PM</span></div>
+  <div><div class="card">
+    <div class="ch"><div class="ico ir">🍛</div><div>
+      <div class="ct">Dinner — Your Call</div>
+      <div class="cs">Two strong options · Both confirmed open · No seed oils in cooking fats</div>
+    </div></div>
+    <p class="desc">Decide before you leave Chautauqua so you can navigate directly. Both are genuinely excellent — here's the honest comparison:</p>
+
+    <div class="compare">
+      <div class="opt winner">
+        <div class="opt-label">Our pick — Boulder</div>
+        <div class="opt-name">Sherpa's Adventure</div>
+        <div class="opt-row">📍 825 Walnut St, Boulder<br>(303) 440-7151</div>
+        <div class="opt-row"><strong>Sat dinner:</strong> 5:00–10:00 PM</div>
+        <div class="opt-row"><strong>Cooking fat:</strong> <span class="oil-pill oil-ok">Ghee + charcoal tandoor</span></div>
+        <div class="opt-row"><strong>Vibe:</strong> Converted house with patio, Flatiron views, cozy and family-friendly. Boulder institution since 2002. Every dish made to order from scratch. Voted best Nepalese/Indian restaurant 2002–2025.</div>
+        <div class="opt-row"><strong>Distance:</strong> 5 min from Chautauqua</div>
+      </div>
+      <div class="opt">
+        <div class="opt-label">Backup — On your way home</div>
+        <div class="opt-name">Spice Room</div>
+        <div class="opt-row">📍 3100 E Colfax Ave, Denver<br>(303) 285-3700</div>
+        <div class="opt-row"><strong>Hours:</strong> Open daily to 10 PM Fri/Sat</div>
+        <div class="opt-row"><strong>Cooking fat:</strong> <span class="oil-pill oil-ok">Rice bran oil + ghee, no MSG</span></div>
+        <div class="opt-row"><strong>Vibe:</strong> Denver's #1 rated Indian (4.9★, 3,400+ reviews). On your drive home to Aurora. More casual, faster, 80+ dish menu.</div>
+        <div class="opt-row"><strong>Distance:</strong> ~35 min — on the route home</div>
+      </div>
+    </div>
+
+    <div class="warn-box">⚠️ If you pick Sherpa's: call ahead at (303) 440-7151 — dinner starts at 5 PM. Arriving at 4:30 is between services. They may seat you with drinks while you wait, or time your Chautauqua departure to arrive closer to 5.</div>
+
+    <div class="sl">Sherpa's — order this</div>
+    <ul class="rl">
+      <li>Sherpa Stew (yak or chicken) — the signature dish, deeply nourishing, unlike anything else</li>
+      <li>Steamed Momos — handmade Tibetan dumplings with homemade chutney</li>
+      <li>Saag with lamb or paneer — creamed spinach, fresh garlic, ginger</li>
+      <li>Garlic Naan — tandoor-baked, brushed with fresh ghee at the table</li>
+      <li>Homemade Sherpa Chai to finish — the recipe that launched a national brand</li>
+    </ul>
+    <div class="sl">Spice Room — order this</div>
+    <ul class="rl" style="margin-bottom:0.75rem">
+      <li>Butter Chicken — velvety tomato-cream, the dish that made their reputation</li>
+      <li>Lamb Biryani — fragrant, slow-cooked, generous portions</li>
+      <li>Palak Paneer — fresh paneer in emerald spinach</li>
+      <li>Garlic Naan — clay oven, hand-rolled daily</li>
+      <li>Mango Lassi to finish</li>
+    </ul>
+
+    <div class="parking-box">
+      <div class="parking-header"><span>🅿️</span><span class="parking-title">Parking — Sherpa's</span><span class="parking-cost cost-free">FREE Saturdays</span></div>
+      <p class="parking-text"><strong>Randolph Garage (11th & Walnut)</strong> — 1 min walk to Sherpa's. Completely free all day Saturday. On-street meters on Walnut St also free Saturdays (enforcement ends 7 PM, no time limit).</p>
+      <div class="btn-row">
+        <a class="pill-btn btn-gold" href="https://www.google.com/maps/place/Randolph+Parking+Garage,+1101+Walnut+St,+Boulder,+CO" target="_blank">📍 Randolph Garage (11th & Walnut)</a>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <a class="pill-btn btn-green" href="https://www.google.com/maps/place/Sherpa%27s+Adventure+Restaurant+%26+Bar,+825+Walnut+St,+Boulder,+CO+80302" target="_blank">📍 Sherpa's on Maps</a>
+      <a class="pill-btn btn-ink" href="https://sherparestaurantboulder.com/boulder-sherpas-adventure-restaurant-and-bar-food-menu" target="_blank">🍽️ Sherpa's Menu</a>
+      <a class="pill-btn btn-green" href="https://www.google.com/maps/place/Spice+Room,+3100+E+Colfax+Ave,+Denver,+CO+80206" target="_blank">📍 Spice Room on Maps</a>
+      <a class="pill-btn btn-ink" href="https://denverspiceroom.com/menu/" target="_blank">🍽️ Spice Room Menu</a>
+    </div>
+
+    <button class="qtoggle" onclick="tog(this)">💬 Couples questions <span class="arr">▼</span></button>
+    <div class="qpanel">
+      <div class="qcard"><span class="qtype">Hygge / Reflective</span><span class="qtext">What was the best moment of today for you? Not the most beautiful — the one that felt most like us.</span></div>
+      <div class="qcard"><span class="qtype">Orthodox Christian</span><span class="qtext">Is there a prayer or Scripture that has meant something different since becoming a parent — something that lands differently now?</span></div>
+      <div class="qcard"><span class="qtype">Romantic</span><span class="qtext">If you could go back and relive one ordinary day from before we had kids — not a milestone, just a random Tuesday — what would it be and why?</span></div>
+      <div class="qcard"><span class="qtype">Spicy</span><span class="qtext">What's something you want more of from me — in any area — that you haven't figured out how to ask for yet?</span></div>
+      <div class="qcard"><span class="qtype">Deep</span><span class="qtext">What do you need that you're not getting right now? From life — not just from me.</span></div>
+      <div class="qcard"><span class="qtype">Uncomfortable / Important</span><span class="qtext">Is there anything you've been afraid to tell me lately — not because you think I'd be angry, but because you're afraid of what it might change?</span></div>
+      <div class="qcard"><span class="qtype">Falling in love again</span><span class="qtext">What's a moment from earlier today when you looked at me and felt proud — of me, of us, of the family we're building?</span></div>
+      <div class="qcard"><span class="qtype">Beautiful</span><span class="qtext">If tonight, after the babies are asleep, you could say one thing to me that you never get the space or energy to say — what would it be?</span></div>
+      <div class="qcard"><span class="qtype">Deep / Honest</span><span class="qtext">What's a character flaw in yourself that you think has actually gotten worse since we became parents — something the exhaustion or the pressure has amplified in you?</span></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="travel"><div></div><div class="tline"><div class="tdot"></div>~45 min drive home · US-36 East → Aurora · ETA ~6:15 PM</div></div>
+
+<!-- ══ STOP 7 ══ -->
+<div class="stop">
+  <div class="time-col"><span class="tbadge">5:30 PM</span></div>
+  <div><div class="card">
+    <div class="ch"><div class="ico ik">🏡</div><div>
+      <div class="ct">Drive home</div>
+      <div class="cs">US-36 East → Havana & Mexico Ave · ~45 min · ETA ~6:15 PM</div>
+    </div></div>
+    <p class="desc">Babies probably asleep in the car. Today was a lot — in the best way. Pour something good once they're down.</p>
+    <div class="tags">
+      <span class="tag ts">US-36 East</span>
+      <span class="tag tg">~45 min</span>
+      <span class="tag tb">ETA ~6:15 PM</span>
+    </div>
+    <div class="btn-row">
+      <a class="pill-btn btn-green" href="https://www.google.com/maps/dir/825+Walnut+St,+Boulder,+CO/Havana+St+%26+Mexico+Ave,+Aurora,+CO" target="_blank">📍 Sherpa's → Home</a>
+      <a class="pill-btn btn-green" href="https://www.google.com/maps/dir/3100+E+Colfax+Ave,+Denver,+CO/Havana+St+%26+Mexico+Ave,+Aurora,+CO" target="_blank">📍 Spice Room → Home</a>
+    </div>
+    <button class="qtoggle" onclick="tog(this)">💬 Tonight — after they're asleep <span class="arr">▼</span></button>
+    <div class="qpanel">
+      <div class="qcard"><span class="qtype">Closing</span><span class="qtext">What's one thing from today you want to hold onto? Something you don't want to forget.</span></div>
+      <div class="qcard"><span class="qtype">Deep</span><span class="qtext">If you could give our kids one memory from today to carry with them — even if they can't consciously remember it — what would you want it to be?</span></div>
+      <div class="qcard"><span class="qtype">Romantic</span><span class="qtext">Tell me one thing about today that made you glad you married me.</span></div>
+      <div class="qcard"><span class="qtype">Beautiful</span><span class="qtext">What's one thing you noticed today — something small, something most people would miss — that made the world feel worth it?</span></div>
+      <div class="qcard"><span class="qtype">Vulnerable / Closing</span><span class="qtext">Is there anything you need from me this week — just one thing — that would make you feel less alone in all of this?</span></div>
+    </div>
+  </div></div>
+</div>
+
+</div><!-- end timeline -->
+
+<div class="footer">
+  <div class="footer-hearts">✦ ✦ ✦</div>
+  <div>Made with love for our family day &nbsp;·&nbsp; May 2, 2026</div>
+</div>
+
+<script>
+function tog(btn){
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+window.addEventListener('scroll',function(){
+  var d=document.documentElement;
+  var s=d.scrollTop||document.body.scrollTop;
+  var t=d.scrollHeight-d.clientHeight;
+  document.getElementById('pf').style.width=(t>0?Math.round(s/t*100):0)+'%';
+});
+</script>
+</body>
+</html>
