@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cruise Comparison — Side by Side</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: #dbe3ee;
+      --a: #0f766e;
+      --a-soft: #ecfdf5;
+      --b: #1d4ed8;
+      --b-soft: #eff6ff;
+      --warn: #fff7ed;
+      --shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0f766e, #1d4ed8);
+      color: white;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 38px; }
+    .hero p { margin: 0; max-width: 90ch; color: rgba(255,255,255,0.92); }
+    .note {
+      margin-top: 18px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+    .section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .section-header {
+      padding: 22px 24px 10px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbfe 100%);
+    }
+    .section-header h2 { margin: 0 0 6px; font-size: 26px; }
+    .section-header p { margin: 0 0 10px; color: var(--muted); }
+    .section-body { padding: 22px 24px 26px; }
+    .budget-grid, .compare-grid, .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .col {
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+    .col.a { background: linear-gradient(180deg, var(--a-soft), #ffffff); }
+    .col.b { background: linear-gradient(180deg, var(--b-soft), #ffffff); }
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .pill.a { background: #d1fae5; color: #065f46; }
+    .pill.b { background: #dbeafe; color: #1e40af; }
+    .card-title { margin: 0 0 8px; font-size: 24px; }
+    .subtitle { color: var(--muted); margin-bottom: 12px; }
+    ul { margin: 10px 0 0 18px; }
+    li { margin: 8px 0; }
+    .day {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+    .day:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+    .day h4 { margin: 0 0 8px; font-size: 17px; }
+    .metric-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .metric-table th, .metric-table td {
+      border: 1px solid var(--line);
+      padding: 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+    .metric-table th { background: #f8fafc; }
+    .shared-box {
+      background: linear-gradient(180deg, #fff7ed, #ffffff);
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+    .shared-box h3 { margin: 0 0 10px; }
+    .summary-band {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .stat {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .stat .k { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; opacity: .9; }
+    .stat .v { font-size: 24px; font-weight: 800; margin-top: 4px; }
+    @media (max-width: 980px) {
+      .budget-grid, .compare-grid, .two-col, .summary-band { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Cruise Comparison: Option A vs Option B</h1>
+      <p>This version is laid out in two persistent columns so you can compare Option A and Option B side by side through the report instead of mentally jumping between separate sections.</p>
+      <div class="summary-band">
+        <div class="stat"><div class="k">Option A vibe</div><div class="v">Calmer</div></div>
+        <div class="stat"><div class="k">Option B vibe</div><div class="v">More reef</div></div>
+        <div class="stat"><div class="k">Budget target</div><div class="v">Under $3,100</div></div>
+        <div class="stat"><div class="k">Main tradeoff</div><div class="v">Ship feel vs ports</div></div>
+      </div>
+      <div class="note">
+        Important upfront transparency note: Costco Travel pricing is harder to verify precisely from static pages because the site is JavaScript-rendered, so some numbers below are confirmed while others are best-fit estimates that should be double-checked at final checkout.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Budget reality</h2>
+        <p>The math below sets the frame for both cruise options.</p>
+      </div>
+      <div class="section-body">
+        <div class="shared-box">
+          <ul>
+            <li>BWI to FLL flights: realistically about $600–$900 round-trip for 2 people, with Thanksgiving week likely pushing toward the high end.</li>
+            <li>FLL to Port Everglades: about $60–$80 total round-trip in rideshare.</li>
+            <li>That leaves roughly $2,200–$2,340 for the cruise portion if the full trip needs to stay under $3,100.</li>
+            <li>That means the cruise fare should usually stay at or below about $1,100–$1,170 per person including taxes.</li>
+            <li>Gratuities are extra: about $252 total for HAL or $224 total for Princess.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Ships and fit</h2>
+        <p>The two-column format below keeps the ship match, onboard feel, and port personality aligned row by row.</p>
+      </div>
+      <div class="section-body">
+        <div class="two-col">
+          <article class="col a">
+            <div class="pill a">Option A</div>
+            <h3 class="card-title">Holland America Eurodam</h3>
+            <div class="subtitle">The stronger lifestyle match</div>
+            <ul>
+              <li>Best fit for a quieter, older-skewing, more enrichment-oriented cruise experience.</li>
+              <li>Mid-sized ship at about 2,100 passengers, refurbished in 2023, with a more personal feel.</li>
+              <li>Live music lineup feels especially well matched: Lincoln Center Stage, Billboard Onboard, and B.B. King's Blues Club.</li>
+              <li>EXC programming adds lectures, port context, culinary demonstrations, and documentary-style enrichment.</li>
+              <li>Culinary Arts Center is a notable plus for travelers who enjoy hands-on making and food experiences.</li>
+              <li>Key West fits the couple's likely style very well: walkable, quirky, historical, and easy to do independently.</li>
+              <li>Half Moon Cay offers lower-stress snorkeling in calm, clear water.</li>
+              <li>Main caution: Thanksgiving-week sailings can bring somewhat more families aboard than a quieter early-December departure.</li>
+            </ul>
+          </article>
+
+          <article class="col b">
+            <div class="pill b">Option B</div>
+            <h3 class="card-title">Princess Star Princess</h3>
+            <div class="subtitle">Most snorkeling, most budget room</div>
+            <ul>
+              <li>Best fit if snorkeling quality and overall value matter more than ship intimacy.</li>
+              <li>Brand-new 2025 Sphere Class ship and the most technologically modern option here.</li>
+              <li>Much larger ship at 5,100+ passengers, so the tradeoff is a more resort-like atmosphere.</li>
+              <li>Roatan, Belize, and Cozumel are among the strongest snorkeling ports in the Caribbean.</li>
+              <li>Roatan stands out for reef access at West Bay Beach and relatively easy independent snorkeling.</li>
+              <li>Belize adds reef, wildlife, and archaeology in one place.</li>
+              <li>Cozumel adds very strong reef and sandbar snorkeling options with strong independent-tour value.</li>
+              <li>Main caution: it is a very large ship, so quiet spaces exist, but you have to seek them out intentionally.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Day-by-day comparison</h2>
+        <p>Each day is aligned in matching columns so the schedules can be scanned side by side.</p>
+      </div>
+      <div class="section-body">
+        <div class="compare-grid">
+          <article class="col a">
+            <div class="pill a">Option A itinerary</div>
+            <div class="day"><h4>Day 1 — Fort Lauderdale embark</h4><p>4:00 PM departure. Easier ship to learn quickly. Good first-night value in the dining room and a calm entertainment start.</p></div>
+            <div class="day"><h4>Day 2 — Half Moon Cay</h4><p>Private-island day with especially approachable snorkeling, clear water, and a low-stress beach setup.</p></div>
+            <div class="day"><h4>Day 3 — Sea day</h4><p>Strong sea-day use case: EXC lecture, cooking demo, trivia, spa time, reading, and quality live music.</p></div>
+            <div class="day"><h4>Day 4 — Grand Turk</h4><p>One of the easiest shore-access snorkel days, plus a small museum and an overall slower pace.</p></div>
+            <div class="day"><h4>Day 5 — Amber Cove</h4><p>Best used as a jumping-off point for Puerto Plata history, architecture, and culture rather than just the port area itself.</p></div>
+            <div class="day"><h4>Day 6 — Thanksgiving sea day</h4><p>Traditional dinner, calm onboard rhythm, and a good fit for travelers who enjoy cards, reading, and low-key activities.</p></div>
+            <div class="day"><h4>Day 7 — Key West</h4><p>Very walkable and independent, with strong museum, aquarium, butterfly, and browsing appeal.</p></div>
+            <div class="day"><h4>Day 8 — Return to Fort Lauderdale</h4><p>7:00 AM arrival and straightforward airport transfer.</p></div>
+          </article>
+
+          <article class="col b">
+            <div class="pill b">Option B itinerary</div>
+            <div class="day"><h4>Day 1 — Fort Lauderdale embark</h4><p>2:00 PM departure. Bigger-ship orientation takes more effort, but the Piazza and Sanctuary set up the quiet strategy well.</p></div>
+            <div class="day"><h4>Day 2 — Sea day</h4><p>Quiet options exist, especially Sanctuary and Explorers Lounge, with more tech-forward ship features.</p></div>
+            <div class="day"><h4>Day 3 — Sea day</h4><p>Another sea day with workshops, destination talks, games, and theater — more resort energy than HAL.</p></div>
+            <div class="day"><h4>Day 4 — Roatan</h4><p>Excellent snorkeling day with very strong reef access and additional nature options like Gumbalimba Park.</p></div>
+            <div class="day"><h4>Day 5 — Belize City</h4><p>More logistics because of tendering, but a standout day for wildlife and Mayan ruins if executed well.</p></div>
+            <div class="day"><h4>Day 6 — Cozumel</h4><p>A signature snorkeling day with late departure, strong El Cielo appeal, and a memorable Thanksgiving port call.</p></div>
+            <div class="day"><h4>Day 7 — Sea day</h4><p>Final sea day with Gala-evening energy, games, shows, and optional retreat time.</p></div>
+            <div class="day"><h4>Day 8 — Return to Fort Lauderdale</h4><p>7:00 AM arrival and standard transfer back to FLL.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Fit assessment</h2>
+        <p>A direct table for faster scanning across the major decision categories.</p>
+      </div>
+      <div class="section-body">
+        <table class="metric-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Option A — HAL Eurodam</th>
+              <th>Option B — Princess Star Princess</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Ship size / vibe</td><td>~2,100 passengers, intimate, calm, cultivated</td><td>~5,100 passengers, modern resort feel, can be loud</td></tr>
+            <tr><td>Snorkeling</td><td>Excellent, guided, gentle</td><td>World-class, more varied and reef-heavy</td></tr>
+            <tr><td>Nature & animals</td><td>Good</td><td>Outstanding</td></tr>
+            <tr><td>Museums & history</td><td>Excellent</td><td>Good</td></tr>
+            <tr><td>Hands-on onboard activities</td><td>Better structured</td><td>Available, but less defining</td></tr>
+            <tr><td>Entertainment style</td><td>Understated, quality live music</td><td>Bigger production feel</td></tr>
+            <tr><td>Quiet spaces</td><td>Abundant</td><td>Present, but more intentional to find</td></tr>
+            <tr><td>Budget</td><td>$2,540–$3,040 all-in</td><td>$1,828–$2,668 all-in</td></tr>
+            <tr><td>Best overall fit</td><td>Better personality match</td><td>Better ports-for-money match</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Room upgrades and transport</h2>
+        <p>These details are easier to compare when the room suggestions are kept side by side.</p>
+      </div>
+      <div class="section-body">
+        <div class="two-col">
+          <article class="col a">
+            <div class="pill a">Option A room view</div>
+            <ul>
+              <li>Category E or F Large Oceanview gives a proper unobstructed window.</li>
+              <li>Verandah categories V, VB, VC, and VA are the better balcony targets if avoiding partially obstructed options.</li>
+              <li>Expected upgrade cost over interior is roughly $100–$300 per person depending on view type.</li>
+            </ul>
+          </article>
+          <article class="col b">
+            <div class="pill b">Option B room view</div>
+            <ul>
+              <li>Deluxe Oceanview or Cove Balcony are the cleanest upgrade paths for an actual view.</li>
+              <li>Because the base fare is lower, balcony upgrades leave more room in the total budget.</li>
+              <li>Estimated upgrade cost is roughly $100–$200 per person.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="shared-box" style="margin-top:20px;">
+          <h3>Transport plan</h3>
+          <p>Morning BWI to FLL flights are the safest fit for both sailings, with Fort Lauderdale airport to Port Everglades usually taking 10–15 minutes by rideshare. Both ships return around 7:00 AM, making a same-day afternoon flight home realistic if disembarkation runs smoothly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Recommendation</h2>
+        <p>The decision becomes simpler when framed as a personality match versus a ports-and-value match.</p>
+      </div>
+      <div class="section-body">
+        <div class="two-col">
+          <article class="col a">
+            <div class="pill a">Why Option A wins</div>
+            <p>Option A looks like the stronger gift for the specific couple described: quieter ship, better enrichment rhythm, better cultural fit, stronger low-key onboard life, and ports that are easier to enjoy without stress.</p>
+            <p>If the point is to give them the trip they are most likely to genuinely enjoy, not just the objectively flashier itinerary, Eurodam makes the most sense.</p>
+          </article>
+          <article class="col b">
+            <div class="pill b">Why Option B wins</div>
+            <p>Option B is the better answer if snorkeling quality and budget flexibility matter most. It saves substantial money while improving the reef and wildlife upside.</p>
+            <p>If the bigger ship does not bother them, Star Princess gives more port excitement per dollar.</p>
+          </article>
+        </div>
+        <div class="shared-box" style="margin-top:20px;">
+          <h3>Bottom booking note</h3>
+          <p>Both options depart the Saturday before Thanksgiving, so flight pricing is a real variable. If airfare looks too high, the Dec 5 Eurodam date may preserve the preferred cruise style while lowering transport cost.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
