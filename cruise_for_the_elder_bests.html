@@ -41,10 +41,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('https://www.princess.com/content/dam/princess/ships/regal-princess/regal-princess-exterior-sea.jpg');
-      background-size: cover;
-      background-position: center 40%;
-      filter: brightness(0.55);
+      background: linear-gradient(135deg, #0d3d52 0%, #1a6e8e 50%, #0d3d52 100%);
     }
 
     .hero-overlay {
@@ -176,17 +173,9 @@
 
     .ship-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 40px;
       align-items: center;
-    }
-
-    .ship-grid img {
-      width: 100%;
-      border-radius: 12px;
-      object-fit: cover;
-      height: 380px;
-      box-shadow: 0 20px 50px rgba(13,61,82,0.15);
     }
 
     .ship-bullets {
@@ -323,15 +312,7 @@
       letter-spacing: 0.05em;
     }
 
-    .day-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-top: 14px;
-    }
 
-    /* ── PORT GALLERY ── */
     .port-gallery { background: var(--deep); padding: 80px 24px; }
 
     .port-gallery .section-title { color: var(--white); }
@@ -596,9 +577,9 @@
 <section class="intro-strip">
   <div class="section-inner" style="text-align:center;">
     <p class="section-label">The big picture</p>
-    <h2 class="section-title">A week just for the two of you</h2>
+    <h2 class="section-title">A week made for you</h2>
     <p class="section-body">
-      Picture this: You're sailing through the Western Caribbean on a beautiful Princess cruise ship, waking up each morning to something new — a quiet morning coffee on the balcony at sea, a walk through ancient Mayan ruins, snorkeling in water so clear you can count the fish. No itineraries to plan, no cooking, no errands. Just the two of you, together, in one of the most beautiful corners of the world.
+      Picture this: You're sailing through the Western Caribbean on a beautiful Princess cruise ship, waking up each morning to something new — a quiet morning coffee on the balcony at sea, a walk through ancient Mayan ruins, snorkeling in water so clear you can count the fish. No itineraries to plan, no cooking, no errands. Just you, exploring one of the most beautiful corners of the world.
     </p>
   </div>
 </section>
@@ -607,11 +588,6 @@
 <section class="section ship-feature">
   <div class="section-inner">
     <div class="ship-grid">
-      <img
-        src="https://www.princess.com/content/dam/princess/ships/regal-princess/regal-princess-ship-exterior.jpg"
-        alt="Regal Princess cruise ship"
-        onerror="this.src='https://images.unsplash.com/photo-1548195667-1a7b686ce506?w=800&q=80'; this.onerror=null;"
-      />
       <div>
         <p class="section-label">Your home at sea</p>
         <h2 class="section-title">Regal Princess</h2>
@@ -716,11 +692,6 @@
             <span class="activity-tag">🌊 SeaWalk Views</span>
             <span class="activity-tag">🎶 Live Music</span>
           </div>
-          <img
-            src="https://www.princess.com/content/dam/princess/ships/regal-princess/regal-princess-seawalk.jpg"
-            alt="The SeaWalk on Regal Princess"
-            onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'; this.onerror=null;"
-          />
         </div>
       </div>
 
@@ -740,11 +711,6 @@
             <span class="activity-tag">🏖️ Beach Time</span>
             <span class="activity-tag">🌿 Nature Walks</span>
           </div>
-          <img
-            src="https://www.princess.com/content/dam/princess/destinations/caribbean/western-caribbean/roatan-honduras-beach.jpg"
-            alt="Roatan Honduras turquoise waters"
-            onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80'; this.onerror=null;"
-          />
         </div>
       </div>
 
@@ -764,11 +730,6 @@
             <span class="activity-tag">🤿 Barrier Reef</span>
             <span class="activity-tag">🌺 Jungle Nature</span>
           </div>
-          <img
-            src="https://www.princess.com/content/dam/princess/destinations/caribbean/western-caribbean/belize-mayan-ruins.jpg"
-            alt="Mayan ruins in Belize"
-            onerror="this.src='https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=800&q=80'; this.onerror=null;"
-          />
         </div>
       </div>
 
@@ -788,11 +749,6 @@
             <span class="activity-tag">🏛️ Local Museum</span>
             <span class="activity-tag">🌊 Beach Stroll</span>
           </div>
-          <img
-            src="https://www.princess.com/content/dam/princess/destinations/caribbean/western-caribbean/cozumel-snorkeling.jpg"
-            alt="Crystal clear waters of Cozumel"
-            onerror="this.src='https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80'; this.onerror=null;"
-          />
         </div>
       </div>
 
@@ -805,7 +761,7 @@
         <div class="day-card sea">
           <h3>🌊 Day at Sea — Heading Home</h3>
           <div class="date-tag">Final Sea Day</div>
-          <p>One last beautiful day on the water. Soak it all in — the warmth, the breeze, the sound of the ocean. Maybe do a little souvenir shopping on board, catch an afternoon show, or simply sit together and talk about your favorite moments. Tonight's dinner deserves a celebration.</p>
+          <p>One last beautiful day on the water. Soak it all in — the warmth, the breeze, the sound of the ocean. Maybe do a little souvenir shopping on board, catch an afternoon show, or simply reflect on your favorite moments. Tonight's dinner deserves a celebration.</p>
           <div class="activities">
             <span class="activity-tag">🛍️ Onboard Shopping</span>
             <span class="activity-tag">🎭 Evening Show</span>
@@ -835,53 +791,12 @@
   </div>
 </section>
 
-<!-- ── PORT GALLERY ── -->
-<section class="port-gallery">
-  <div class="section-inner">
-    <p class="section-label">Three stunning destinations</p>
-    <h2 class="section-title" style="color:var(--white);">Places You'll Never Forget</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img
-          src="https://www.princess.com/content/dam/princess/destinations/caribbean/western-caribbean/roatan-mahogany-bay.jpg"
-          alt="Roatan Honduras"
-          onerror="this.src='https://images.unsplash.com/photo-1559827291-72f0d32e4cd0?w=600&q=80'; this.onerror=null;"
-        />
-        <div class="gallery-caption">Roatán, Honduras</div>
-      </div>
-      <div class="gallery-item">
-        <img
-          src="https://www.princess.com/content/dam/princess/destinations/caribbean/western-caribbean/belize-barrier-reef.jpg"
-          alt="Belize Barrier Reef"
-          onerror="this.src='https://images.unsplash.com/photo-1572105879854-5a4e0c4a9e53?w=600&q=80'; this.onerror=null;"
-        />
-        <div class="gallery-caption">Belize Barrier Reef</div>
-      </div>
-      <div class="gallery-item">
-        <img
-          src="https://www.princess.com/content/dam/princess/destinations/caribbean/western-caribbean/cozumel-mexico-reef.jpg"
-          alt="Cozumel Mexico"
-          onerror="this.src='https://images.unsplash.com/photo-1544551763-77ef2d0cfc06?w=600&q=80'; this.onerror=null;"
-        />
-        <div class="gallery-caption">Cozumel, Mexico</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- wave -->
-<div class="wave-divider" style="background: var(--deep);">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60">
-    <path fill="#ffffff" d="M0,30 C360,0 1080,60 1440,30 L1440,60 L0,60 Z"/>
-  </svg>
-</div>
-
 <!-- ── FLIGHTS ── -->
 <section class="section flights">
   <div class="section-inner">
     <p class="section-label">Getting there & back</p>
-    <h2 class="section-title">Your Flights</h2>
-    <p class="section-body">Both flights are nonstop on American Airlines — simple, direct, and easy. No connections, no layovers. Just take off, relax, and land.</p>
+    <h2 class="section-title">Suggested Flights</h2>
+    <p class="section-body">These flights are suggestions — we'll finalize the details together later. But here's the idea: both are nonstop on American Airlines, simple and direct. No connections, no layovers.</p>
 
     <div class="flight-cards">
       <!-- Outbound -->
@@ -964,7 +879,7 @@
     You deserve this.
   </h2>
   <p>
-    You both work hard, love deeply, and give so much of yourselves every single day. This trip is a chance to step away from the everyday — to see something breathtaking, to snorkel together in crystal-clear water, to sit quietly side by side on a ship watching the sun go down over the Caribbean Sea. This is your week. Your adventure. We can't wait for you to experience it.
+    You work hard, love deeply, and give so much every single day. This trip is a chance to step away from the everyday — to see something breathtaking, to snorkel in crystal-clear water, to sit quietly on a ship watching the sun go down over the Caribbean Sea. This is your week. Your adventure. We can't wait for you to experience it.
   </p>
   <div style="margin-top: 16px;">
     <span style="display:inline-block; background:rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); color:white; padding:12px 32px; border-radius:40px; font-size:1rem; letter-spacing:0.08em;">
