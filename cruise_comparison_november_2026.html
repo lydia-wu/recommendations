@@ -1,0 +1,156 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.wrap { padding: 1.5rem 0; }
+.option { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1.5rem; }
+.option.pick { border: 2px solid #1D9E75; }
+.badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: var(--border-radius-md); margin-bottom: 10px; }
+.badge-green { background: #E1F5EE; color: #0F6E56; }
+.badge-blue { background: #E6F1FB; color: #185FA5; }
+.opt-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.opt-title { font-size: 17px; font-weight: 500; color: var(--color-text-primary); }
+.opt-sub { font-size: 13px; color: var(--color-text-secondary); margin-top: 2px; }
+.price-big { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.price-label { font-size: 11px; color: var(--color-text-secondary); text-align: right; }
+.section-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin: 14px 0 6px; }
+.row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; padding: 4px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.row:last-child { border-bottom: none; }
+.row-label { color: var(--color-text-secondary); }
+.row-val { font-weight: 500; color: var(--color-text-primary); }
+.row-sub { font-size: 11px; color: var(--color-text-secondary); }
+.total-row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0 0; margin-top: 6px; border-top: 0.5px solid var(--color-border-primary); }
+.total-label { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.total-val { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+.total-val.ok { color: #0F6E56; }
+.itinerary { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.port { font-size: 12px; padding: 3px 9px; border-radius: 20px; background: var(--color-background-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border-tertiary); }
+.port.highlight { background: #E1F5EE; color: #0F6E56; border-color: #9FE1CB; }
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.excur { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.excur:last-child { border-bottom: none; }
+.note { font-size: 12px; color: var(--color-text-secondary); background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 8px 12px; margin-top: 12px; }
+.divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
+@media (max-width: 500px) { .cols2 { grid-template-columns: 1fr; } }
+</style>
+<h2 class="sr-only" style="position:absolute;left:-9999px">Costco Travel cruise comparison for November 2026</h2>
+<div class="wrap">
+
+<div class="option pick">
+  <span class="badge badge-green">✦ Top pick — best fit for their interests</span>
+  <div class="opt-header">
+    <div>
+      <div class="opt-title">Option A — Holland America Eurodam</div>
+      <div class="opt-sub">Eastern Caribbean: Half Moon Cay, Amber Cove, Grand Turk &amp; Key West</div>
+      <div class="opt-sub" style="margin-top:2px">Sat Nov 21 → Sat Nov 28, 2026 · 7 nights · Round-trip Fort Lauderdale</div>
+    </div>
+    <div style="text-align:right">
+      <div class="price-big">$1,958+</div>
+      <div class="price-label">cruise only, 2 people, interior<br>Costco: from $879/person*</div>
+    </div>
+  </div>
+
+  <div class="section-label">Itinerary</div>
+  <div class="itinerary">
+    <span class="port">Fort Lauderdale (embark)</span>
+    <span class="port highlight">Half Moon Cay (snorkeling)</span>
+    <span class="port">Day at sea</span>
+    <span class="port highlight">Grand Turk (Turks &amp; Caicos)</span>
+    <span class="port">Amber Cove, Dominican Republic</span>
+    <span class="port">Day at sea</span>
+    <span class="port">Key West, FL</span>
+    <span class="port">Fort Lauderdale (disembark)</span>
+  </div>
+
+  <div class="section-label">Budget breakdown</div>
+  <div class="row"><span class="row-label">Cruise — interior stateroom × 2 (taxes incl.)</span><span class="row-val">$1,758</span></div>
+  <div class="row"><span class="row-label">Upgrade to oceanview stateroom × 2</span><span class="row-val">+$200–400 est.</span></div>
+  <div class="row"><span class="row-label">Flights BWI → FLL round-trip × 2 (Southwest)</span><span class="row-val">$600–900</span></div>
+  <div class="row"><span class="row-label">Airport ↔ port (Uber/Lyft × 2 trips)</span><span class="row-val">~$60–80</span></div>
+  <div class="row"><span class="row-label">Excursions (2 ports, see below)</span><span class="row-val">$120–200</span></div>
+
+  <div class="total-row">
+    <span class="total-label">Total (interior, budget flights, 2 excursions)</span>
+    <span class="total-val ok">~$2,540–$2,940</span>
+  </div>
+  <div class="total-row">
+    <span class="total-label">Total with oceanview upgrade</span>
+    <span class="total-val ok">~$2,740–$3,040</span>
+  </div>
+  <div class="note">✓ Confirmed on Costco Travel. Look for "Eurodam — Eastern Caribbean: Amber Cove &amp; Bahamas" on costcotravel.com. The Nov 21 sailing is a confirmed active date. Includes Digital Costco Shop Card with booking. Gratuities (~$18/person/day) are NOT included and add ~$252 for 2 people over 7 nights — factor this in.</div>
+</div>
+
+<div class="option">
+  <span class="badge badge-blue">Option B — Princess Star Princess</span>
+  <div class="opt-header">
+    <div>
+      <div class="opt-title">Option B — Princess Star Princess</div>
+      <div class="opt-sub">Western Caribbean: Roatan, Belize City, Cozumel &amp; Princess Cays</div>
+      <div class="opt-sub" style="margin-top:2px">Sat Nov 21 → Sat Nov 28, 2026 · 7 nights · Round-trip Fort Lauderdale</div>
+    </div>
+    <div style="text-align:right">
+      <div class="price-big">$1,018+</div>
+      <div class="price-label">cruise only, 2 people, interior<br>Costco: from $509/person*</div>
+    </div>
+  </div>
+
+  <div class="section-label">Itinerary</div>
+  <div class="itinerary">
+    <span class="port">Fort Lauderdale (embark)</span>
+    <span class="port">Day at sea</span>
+    <span class="port">Day at sea</span>
+    <span class="port highlight">Roatan, Honduras</span>
+    <span class="port highlight">Belize City, Belize</span>
+    <span class="port highlight">Cozumel, Mexico</span>
+    <span class="port">Day at sea</span>
+    <span class="port">Fort Lauderdale (disembark)</span>
+  </div>
+
+  <div class="section-label">Budget breakdown</div>
+  <div class="row"><span class="row-label">Cruise — interior stateroom × 2 (taxes incl.)</span><span class="row-val">$1,018</span></div>
+  <div class="row"><span class="row-label">Upgrade to deluxe balcony × 2</span><span class="row-val">+$200–500 est.</span></div>
+  <div class="row"><span class="row-label">Flights BWI → FLL round-trip × 2 (Southwest)</span><span class="row-val">$600–900</span></div>
+  <div class="row"><span class="row-label">Airport ↔ port (Uber/Lyft × 2 trips)</span><span class="row-val">~$60–80</span></div>
+  <div class="row"><span class="row-label">Excursions (3 ports, see below)</span><span class="row-val">$150–270</span></div>
+
+  <div class="total-row">
+    <span class="total-label">Total (interior, budget flights, 3 excursions)</span>
+    <span class="total-val ok">~$1,828–$2,268</span>
+  </div>
+  <div class="total-row">
+    <span class="total-label">Total with balcony upgrade</span>
+    <span class="total-val ok">~$2,028–$2,668</span>
+  </div>
+  <div class="note">✓ Confirmed on Costco Travel. Look for "Star Princess — Western Caribbean with Mexico" on costcotravel.com (offer code area: PCLSTACAR). Nov 21 sailing is a confirmed active date. Includes Digital Costco Shop Card. Gratuities (~$16/person/day) add ~$224 for 2 people — not included in cruise fare.</div>
+</div>
+
+<hr class="divider">
+
+<div class="cols2">
+  <div>
+    <div class="section-label">Option A excursions (HAL Eurodam)</div>
+    <div class="excur"><span>Half Moon Cay — snorkel &amp; stingray tour (HAL)</span><span style="font-weight:500">$65–75/pp</span></div>
+    <div class="excur"><span>Grand Turk — coral reef snorkeling (HAL)</span><span style="font-weight:500">$55–75/pp</span></div>
+    <div class="excur"><span>Key West — self-guided walk/rent bikes</span><span style="font-weight:500">$0–30/pp</span></div>
+    <div class="excur"><span>Amber Cove — waterfall hike, Puerto Plata</span><span style="font-weight:500">$60–85/pp</span></div>
+    <div class="note">Half Moon Cay excursions must be booked through HAL — it's their private island. Third-party tours available at Grand Turk &amp; Key West.</div>
+  </div>
+  <div>
+    <div class="section-label">Option B excursions (Princess Star Princess)</div>
+    <div class="excur"><span>Roatan — snorkeling West Bay reef (ind.)</span><span style="font-weight:500">$45–75/pp</span></div>
+    <div class="excur"><span>Belize — Altun Ha ruins &amp; river wildlife</span><span style="font-weight:500">$65–90/pp</span></div>
+    <div class="excur"><span>Cozumel — El Cielo snorkel &amp; sandbar</span><span style="font-weight:500">$50–75/pp</span></div>
+    <div class="note">Independent tour operators in Roatan and Cozumel offer 40–60% savings vs. ship-booked excursions. Belize requires tendering, so ship excursions offer guaranteed return.</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section-label">Costco Travel URL to verify &amp; book</div>
+<div class="note" style="margin-top:0">
+  <strong>Option A:</strong> costcotravel.com → Cruises → Holland America → search "Eurodam" → "Eastern Caribbean: Amber Cove &amp; Bahamas" → select Nov 21, 2026<br><br>
+  <strong>Option B:</strong> costcotravel.com → Cruises → Princess → search "Star Princess" → "Western Caribbean with Mexico" → select Nov 21, 2026<br><br>
+  * Prices are per person, double occupancy, taxes &amp; fees included, based on interior stateroom. Costco prices differ slightly from AAA/third-party prices shown here — verify the exact figure at checkout. Gratuities are added separately.
+</div>
+
+</div>
