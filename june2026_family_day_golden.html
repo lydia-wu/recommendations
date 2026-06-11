@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Day · June 13, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sun: #F5A623; --sage: #7A9E7E; --sky: #A8C5DA; --earth: #C4956A;
+    --cream: #FDF8F0; --bark: #3D2B1F; --mist: #EDF2F0; --rose: #E8A89C;
+  }
+  body { background: var(--cream); color: var(--bark); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; }
+
+  .hero {
+    background: linear-gradient(160deg, #2C5F4A 0%, #4A7C6B 40%, #7A9E7E 100%);
+    padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px;
+    background: var(--cream); clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 8vw, 4rem); color: #fff; line-height: 1.1; margin-bottom: 10px; }
+  .hero-title em { font-style: italic; color: #FDDBA0; }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.75); letter-spacing: 0.05em; margin-bottom: 28px; }
+  .hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: rgba(255,255,255,0.9); font-weight: 400; }
+
+  .timeline { max-width: 600px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  .stop { display: grid; grid-template-columns: 56px 1fr; gap: 0 16px; margin-bottom: 8px; position: relative; }
+  .stop:not(:last-child) .time-col::after { content: ''; position: absolute; left: 27px; top: 52px; bottom: -8px; width: 2px; background: linear-gradient(to bottom, var(--sage) 0%, transparent 100%); opacity: 0.25; }
+  .time-col { display: flex; flex-direction: column; align-items: center; padding-top: 14px; position: relative; }
+  .icon-bubble { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; position: relative; z-index: 1; }
+  .time-label { font-size: 10px; font-weight: 500; letter-spacing: 0.05em; color: var(--earth); margin-top: 5px; text-align: center; white-space: nowrap; }
+
+  .card { background: #fff; border-radius: 16px; padding: 16px 18px 18px; margin-bottom: 6px; box-shadow: 0 2px 10px rgba(61,43,31,0.06); }
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.2; color: var(--bark); }
+  .tag { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+  .card-body { font-size: 13.5px; line-height: 1.65; color: #5a4a42; }
+  .card-body p + p { margin-top: 6px; }
+
+  .tip { margin-top: 10px; background: var(--mist); border-left: 3px solid var(--sage); padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 12.5px; color: #4a6b50; line-height: 1.5; }
+  .tip strong { font-weight: 500; }
+
+  .parking-box { margin-top: 10px; background: #FFF9EC; border-left: 3px solid var(--sun); padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 12.5px; color: #6b5420; line-height: 1.6; }
+  .parking-box strong { font-weight: 500; }
+
+  .rental-box { margin-top: 10px; background: #EEF4FD; border-left: 3px solid #5A8FCA; padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 12.5px; color: #2a4a7a; line-height: 1.6; }
+  .rental-box strong { font-weight: 500; }
+
+  .order-box { margin-top: 10px; background: #FDF0ED; border-left: 3px solid var(--earth); padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 12.5px; color: #6b3020; line-height: 1.6; }
+  .order-box strong { font-weight: 500; }
+
+  .checklist { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .check-item { background: #FFF8EC; border: 1px solid #F5E4C0; border-radius: 20px; padding: 4px 11px; font-size: 12px; color: #7A5C2E; }
+
+  .alt-box { margin-top: 10px; background: #F5F0FB; border-left: 3px solid #9A7ABB; padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 12.5px; color: #4a2a7a; line-height: 1.6; }
+  .alt-box strong { font-weight: 500; }
+
+  .hike .icon-bubble { background: #E8F4EC; }
+  .hike .tag { background: #E8F4EC; color: var(--sage); }
+  .creek .icon-bubble { background: #E3F0F7; }
+  .creek .tag { background: #E3F0F7; color: #4A8FAD; }
+  .drive .icon-bubble { background: #FDF3E8; }
+  .drive .tag { background: #FDF3E8; color: var(--earth); }
+  .lunch .icon-bubble { background: #FDE8E3; }
+  .lunch .tag { background: #FDE8E3; color: #C0604A; }
+  .lake .icon-bubble { background: #EAF0FD; }
+  .lake .tag { background: #EAF0FD; color: #4A6AAD; }
+  .nap .icon-bubble { background: #F3EDF7; }
+  .nap .tag { background: #F3EDF7; color: #7A5A9A; }
+  .home .icon-bubble { background: #FDF8E8; }
+  .home .tag { background: #FDF8E8; color: #9A7A2E; }
+  .dinner .icon-bubble { background: #FDE8EC; }
+  .dinner .tag { background: #FDE8EC; color: #C04A5A; }
+  .dessert .icon-bubble { background: #EDF5FD; }
+  .dessert .tag { background: #EDF5FD; color: #3A6A9A; }
+
+  .footer-note { max-width: 560px; margin: 0 auto; padding: 0 20px 48px; text-align: center; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--sage); opacity: 0.8; }
+
+  a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="hero-eyebrow">Saturday · June 13, 2026</p>
+  <h1 class="hero-title"><em>Family Day</em></h1>
+  <p class="hero-sub">Golden · Clear Creek · Evergreen</p>
+  <div class="hero-badges">
+    <span class="badge">🥾 Hike</span>
+    <span class="badge">🌊 Creek</span>
+    <span class="badge">🏔️ Mountains</span>
+    <span class="badge">🚣 Lake</span>
+    <span class="badge">🫐 Cobbler</span>
+  </div>
+</header>
+
+<main class="timeline">
+
+  <!-- DRIVE TO HIKE -->
+  <div class="stop hike">
+    <div class="time-col">
+      <div class="icon-bubble">🚗</div>
+      <span class="time-label">6:45a</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Drive to Golden Cliffs Trailhead</div>
+        <span class="tag hike">Travel · 25 min</span>
+      </div>
+      <div class="card-body">
+        <p>Head out early to snag parking before it fills up. The neighborhood road is tight — drive 20mph please.</p>
+      </div>
+      <div class="parking-box">
+        <strong>🅿️ Parking:</strong> Navigate to <strong>100 Peery Parkway, Golden, CO 80403</strong>. From Hwy 93 heading north, turn right at Pine Ridge Rd, then right into the lot. There are two lots — use the <strong>lower (right fork) lot first</strong> — it has the bathroom, trailhead sign, and trash cans. Upper lot is overflow only. Gets crowded fast on summer weekends — arriving by 7am is key!
+      </div>
+    </div>
+  </div>
+
+  <!-- HIKE -->
+  <div class="stop hike">
+    <div class="time-col">
+      <div class="icon-bubble">🥾</div>
+      <span class="time-label">7:15–9:30a</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">North Table Mountain Hike</div>
+        <span class="tag hike">Golden Cliffs Trail · 2.7mi RT</span>
+      </div>
+      <div class="card-body">
+        <p>Trail starts right from the lower parking lot. It's a steep half-mile fire road up to the mesa, then flat and beautiful on top. Stop at the Golden Cliffs for the views and eat your breakfast burritos up there — pure magic.</p>
+        <p>⚠️ No shade on top — sunscreen up before you leave the car. Rattlesnake habitat, stay on trail.</p>
+      </div>
+      <div class="checklist">
+        <span class="check-item">🌯 Breakfast burritos</span>
+        <span class="check-item">☕ Coffee thermos</span>
+        <span class="check-item">💧 Water for everyone</span>
+        <span class="check-item">🧴 Sunscreen</span>
+        <span class="check-item">🎒 Baby carrier</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRIVE TO CREEK -->
+  <div class="stop creek">
+    <div class="time-col">
+      <div class="icon-bubble">🚗</div>
+      <span class="time-label">9:40a</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Drive to Clear Creek</div>
+        <span class="tag creek">Travel · 10 min</span>
+      </div>
+      <div class="card-body">
+        <p>Quick hop into downtown Golden. Head south on Hwy 93, then east on 10th Street.</p>
+      </div>
+      <div class="parking-box">
+        <strong>🅿️ Parking:</strong> Go straight to <strong>304 10th St, Golden, CO 80401</strong> — this is the <strong>FREE Clear Creek Parking Lot</strong>, right across from the old Coors office building and steps from Vanover Park. If it's full, paid parking is in the <strong>Jackson Street garages (between 11th–13th St)</strong> — first 2 hours free when you register your plate, $2.50/hr after, $10 daily max.
+      </div>
+    </div>
+  </div>
+
+  <!-- CREEK / TUBING -->
+  <div class="stop creek">
+    <div class="time-col">
+      <div class="icon-bubble">🌊</div>
+      <span class="time-label">10:00–11:15a</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Clear Creek Whitewater Park</div>
+        <span class="tag creek">Tubing + Creek Time</span>
+      </div>
+      <div class="card-body">
+        <p><strong>Before you go:</strong> Check flag status at <a href="https://visitgolden.com">VisitGolden.com</a> — green flag = open. No reservation needed.</p>
+        <p><strong>You + babies:</strong> Walk the paved path on the north bank of the creek — flat, stroller-friendly, gorgeous. Watch the tubers from the bank and let the babies splash in the shallows. There's a big grassy park, sand volleyball, and a baseball diamond right there.</p>
+      </div>
+      <div class="rental-box">
+        <strong>🛟 Spouse's Rental — Where to Go:</strong><br>
+        <strong>Option 1 — Golden River Sports</strong> (recommended): <strong>806 Washington Ave, Golden</strong> (2 blocks north of the creek, between 8th & 9th St). Walk in, sign waiver, rent tube + life jacket + helmet. No reservations for groups under 15. Open Sat 10am–6pm. Call: <strong>(303) 215-9386</strong>.<br><br>
+        <strong>Option 2 — Adventure West</strong>: Located at the rear of <strong>423 10th St</strong>, right next to Vanover Park. Tube + 2 shuttle rides = ~$39/person on weekends. Book online to skip the line.
+      </div>
+      <div class="tip">
+        <strong>💡 Tip:</strong> Shoes required — no flip flops for tubers. Spouse should leave valuables in the car or rent a locker ($5) at GRS. The float takes about 1 hour end to end, then walk back or use the shuttle.
+      </div>
+    </div>
+  </div>
+
+  <!-- DRIVE TO EVERGREEN -->
+  <div class="stop drive">
+    <div class="time-col">
+      <div class="icon-bubble">🏔️</div>
+      <span class="time-label">11:30a</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Drive to Evergreen</div>
+        <span class="tag drive">Scenic · ~40 min</span>
+      </div>
+      <div class="card-body">
+        <p>Take Hwy 6 west → Hwy 93 south → Hwy 74 into Evergreen. Windows down, good music. Babies may conk out on the mountain climb. 🤞</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LUNCH -->
+  <div class="stop lunch">
+    <div class="time-col">
+      <div class="icon-bubble">🍔</div>
+      <span class="time-label">12:15p</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Lunch in Evergreen</div>
+        <span class="tag lunch">Choose Your Spot</span>
+      </div>
+
+      <div class="card-body">
+        <p><strong>🥇 First Choice: Marshdale Burger Co.</strong><br>
+        Locally sourced, pasture-raised, grass-fed Colorado ranch beef. Everything scratch-made. Family-friendly with outdoor patio. $10–20/person. Call ahead: <strong>(303) 674-1314</strong></p>
+      </div>
+      <div class="parking-box">
+        <strong>🅿️ Parking — Marshdale:</strong> Located on <strong>Hwy 73 in Marshdale</strong> (on the way to Evergreen Lake). Small parking lot directly in front of the restaurant off Hwy 73. If full, pull off onto the shoulder — this is a casual mountain roadside spot.
+      </div>
+      <div class="order-box">
+        <strong>🍽️ What to Order:</strong> The rotating monthly burger + tater tots + smoked mac & cheese. The green chili is award-winning — add it to your burger. Brioche bun, grass-fed beef. Skip the fryer-heavy sides if you're avoiding seed oils — go for the side salad or coleslaw instead.
+      </div>
+
+      <div class="alt-box">
+        <strong>🔀 Alternate: Murphy's Mountain Grill</strong><br>
+        27906 CO-74, Evergreen · <strong>(720) 524-8621</strong> · Open Sat 11am–9pm<br>
+        More elevated, creek-side patio on Bear Creek, rustic mountain vibe. Slightly more upscale than Marshdale.<br><br>
+        <strong>What to Order:</strong> The <strong>Elk Black & Bleu burger</strong> (Colorado farm-raised elk, garlic blue cheese aioli — reviewers call it the best burger in Colorado), <strong>sweet potato tots</strong>, and the <strong>BBQ half chicken</strong> with finger potatoes. The <strong>taco wontons</strong> are a beloved starter. Note: slightly pricier and can have a wait — arrive right at 12pm.
+      </div>
+      <div class="parking-box" style="margin-top:8px">
+        <strong>🅿️ Parking — Murphy's:</strong> Street parking on CO-74 in downtown Evergreen — can be competitive. Best bet: arrive early and park along the main strip. The restaurant is small so a short wait is possible on weekends.
+      </div>
+    </div>
+  </div>
+
+  <!-- EVERGREEN LAKE -->
+  <div class="stop lake">
+    <div class="time-col">
+      <div class="icon-bubble">🚣</div>
+      <span class="time-label">1:30–2:45p</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Evergreen Lake</div>
+        <span class="tag lake">Canoe + Walk</span>
+      </div>
+      <div class="card-body">
+        <p>Rent a canoe or kayak right at the Lake House — no reservation needed, first-come first-served. Life jackets included in rental price. Paddle up Bear Creek inlet for a gorgeous, calm stretch. Walk the 1.25-mile trail around the lake after. Watch for elk — they actually bathe in this lake. 🦌</p>
+        <p>⚠️ No swimming — this is the community's drinking water source. Wristbands required for all boaters.</p>
+      </div>
+      <div class="parking-box">
+        <strong>🅿️ Parking:</strong> Navigate to <strong>29612 Upper Bear Creek Rd, Evergreen, CO 80439</strong> (Evergreen Lake House). The parking lot fills fast on weekends — if it's full, EPRD closes it and directs you to the <strong>FREE shuttle from Stagecoach Park</strong> at <strong>3229 El Pinal Dr, Evergreen</strong> (runs 10am–5pm). Budget 10 extra minutes if you have to shuttle. Arriving around 1:30pm on a Saturday should be okay.
+      </div>
+      <div class="rental-box">
+        <strong>🛶 Rental — Where to Go:</strong> Walk directly to the <strong>Lake House / Boat House</strong> at the water's edge — you'll see it right from the parking lot. Sign the online waiver in advance to save time: <a href="https://waiver.smartwaiver.com/w/5um22akgusr1hpbcu6xe5p/web/">smartwaiver link</a>. Rentals start at $25. Call the Boating Hotline before you go: <strong>(720) 880-1391</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- NAP DRIVE HOME -->
+  <div class="stop nap">
+    <div class="time-col">
+      <div class="icon-bubble">😴</div>
+      <span class="time-label">3:00p</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Scenic Drive Home</div>
+        <span class="tag nap">Nap window · 50+ min</span>
+      </div>
+      <div class="card-body">
+        <p>Take Bear Creek Canyon Road (Hwy 74 east → CO-8 through Morrison → back to Denver). Winding, beautiful, shady — perfect nap road. No parking needed, just drive slow and enjoy it.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME RESET -->
+  <div class="stop home">
+    <div class="time-col">
+      <div class="icon-bubble">🏡</div>
+      <span class="time-label">4:00p</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Home Reset</div>
+        <span class="tag home">Decompress</span>
+      </div>
+      <div class="card-body">
+        <p>Showers, unpack, books, recharge. Pop the pre-assembled cobbler in the oven at 350°F — it bakes in ~30 min while everyone decompresses. 🫐</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DINNER -->
+  <div class="stop dinner">
+    <div class="time-col">
+      <div class="icon-bubble">🍜</div>
+      <span class="time-label">5:30p</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Golden Saigon Takeout</div>
+        <span class="tag dinner">Dinner · Aurora</span>
+      </div>
+      <div class="card-body">
+        <p>Family-owned Vietnamese gem in Aurora, open since 1995. 4.8★ on Google. Order ahead by phone — they do takeout beautifully. Address: <strong>2648 S Parker Rd Unit 2, Aurora, CO 80014</strong>.</p>
+        <p>Eat on the deck with the cobbler waiting in the oven. Perfect end to the day. 🌅</p>
+      </div>
+      <div class="order-box">
+        <strong>🍽️ What to Order (reviewer favorites):</strong><br>
+        • <strong>Chicken with Lemongrass Butter</strong> — the most-mentioned dish, consistently called incredible<br>
+        • <strong>Pho Tai</strong> (beef pho with rare steak) — husband's favorite per dozens of reviews<br>
+        • <strong>Fried Dumplings</strong> — complimentary ones come with your meal, but order extra<br>
+        • <strong>Seafood Curry</strong> — unique to this restaurant, a cult favorite<br>
+        • <strong>Shrimp Spring Rolls</strong> — fresh and light<br>
+        • <strong>Homemade Ginger Ale</strong> (house-made, non-alcoholic) — do NOT skip this, reviewers are obsessed<br>
+        • <strong>Crab Rangoon</strong> — another crowd pleaser
+      </div>
+      <div class="parking-box">
+        <strong>🅿️ Parking (if picking up):</strong> Strip mall parking lot at 2648 S Parker Rd — free, easy, plenty of spaces. Pull up to Unit 2.
+      </div>
+    </div>
+  </div>
+
+  <!-- BEDTIME + COBBLER -->
+  <div class="stop dessert">
+    <div class="time-col">
+      <div class="icon-bubble">🫐</div>
+      <span class="time-label">7:30p</span>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Cobbler + Movie Night</div>
+        <span class="tag dessert">Wind down</span>
+      </div>
+      <div class="card-body">
+        <p>Kids to bed. Then: warm blueberry sourdough cobbler with vanilla ice cream, a movie, and every inch of the couch. You've earned it.</p>
+      </div>
+      <div class="tip">
+        <strong>🫐 Friday Night Prep:</strong> Mix sourdough discard + flour + buttermilk + honey in a bowl. Cover, leave on counter 8–12 hrs. Saturday: add baking powder, salt, cold butter → lay over blueberry filling in pan → refrigerate. Bake at 350°F for ~30 min Saturday evening. Serve warm with vanilla ice cream.
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<p class="footer-note">"Not all who wander are lost — some are just looking for parking in Evergreen." 🌲</p>
+
+</body>
+</html>
