@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grand Junction Airbnb Comparison</title>
+<style>
+  :root{--bg:#faf7f2;--card:#fff;--ink:#2b2b2b;--muted:#6b6b6b;--accent:#c2410c;--good:#15803d;--line:#e7e1d6}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:1.6rem;margin:0 0 4px}
+  .sub{color:var(--muted);margin:0 0 24px}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px}
+  .card h2{font-size:1.1rem;margin:0}
+  .type{color:var(--muted);font-size:.9rem;margin:0}
+  .price{font-size:2rem;font-weight:700;margin:4px 0 0}
+  .price small{font-size:.85rem;font-weight:400;color:var(--muted)}
+  .row{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:8px;font-size:.95rem}
+  .row span:first-child{color:var(--muted)}
+  .row span:last-child{text-align:right;font-weight:600}
+  .badges{display:flex;flex-wrap:wrap;gap:6px;min-height:26px}
+  .badge{background:#ecfdf3;color:var(--good);border:1px solid #bbf7d0;border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:600}
+  a.btn{margin-top:auto;display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;padding:10px;border-radius:10px;font-weight:600}
+  a.btn:hover{opacity:.9}
+  h3{margin:32px 0 10px;font-size:1.15rem}
+  .tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:.95rem}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:#f3eee5;font-size:.85rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+  tr:last-child td{border-bottom:0}
+  td.best{color:var(--good);font-weight:700}
+  td a{color:var(--accent);font-weight:600}
+  .note{color:var(--muted);font-size:.85rem;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Grand Junction Airbnb Options</h1>
+  <p class="sub">Dec 10 &ndash; 14, 2026 &middot; 4 nights &middot; 5 guests + 1 infant</p>
+
+  <div class="grid" id="cards"></div>
+
+  <h3>Side by side</h3>
+  <div class="tablewrap">
+    <table id="table"></table>
+  </div>
+
+  <p class="note">
+    Prices are what Airbnb showed for these dates (4 nights) and may change; cleaning and service fees may or may not be included, so check at checkout.
+    Distances and drive times are from Google Maps to the Avalon Theatre (645 Main St).
+  </p>
+</div>
+
+<script>
+// ---- EDIT HERE to update numbers ----
+const stays = [
+  {
+    name: "Walk to Downtown | Quiet 4BR w/ EV Charging",
+    type: "Entire home",
+    total: 633, wasTotal: 782,
+    bedrooms: 4, beds: 4, baths: 2, sleeps: 8,
+    rating: "4.85 (96 reviews)",
+    straight: 0.96, driveMi: 1.4, google: "1.4 mi / 3 min",
+    maps: "https://www.google.com/maps/dir/612+N+17th+St,+Grand+Junction,+CO+81501/The+Avalon+Theatre,+645+Main+St,+Grand+Junction,+CO+81501",
+    url: "https://www.airbnb.com/rooms/1214670188225321104?adults=4&check_in=2026-12-10&check_out=2026-12-14&children=1&infants=1"
+  },
+  {
+    name: "The Sunset Oasis @ Poplar Drive",
+    type: "Entire townhouse",
+    total: 550, wasTotal: null,
+    bedrooms: 3, beds: 3, baths: 3, sleeps: 6,
+    rating: "New (no reviews yet)",
+    straight: 1.25, driveMi: 1.8, google: "1.8 mi / 7 min",
+    maps: "https://www.google.com/maps/dir/1558+Poplar+Dr,+Grand+Junction,+CO+81505/The+Avalon+Theatre,+645+Main+St,+Grand+Junction,+CO+81501",
+    url: "https://www.airbnb.com/rooms/1815515463735407301?adults=4&check_in=2026-12-10&check_out=2026-12-14&children=1&infants=1"
+  },
+  {
+    name: "*Updated Charmer* | Great Location",
+    type: "Entire home",
+    total: 614, wasTotal: 711,
+    bedrooms: 3, beds: 4, baths: 2, sleeps: 8,
+    rating: "4.81 (232 reviews)",
+    straight: 2.98, driveMi: 4.0, google: "4.0 mi / 13 min",
+    maps: "https://www.google.com/maps/dir/703+Brassie+Dr,+Grand+Junction,+CO+81506/The+Avalon+Theatre,+645+Main+St,+Grand+Junction,+CO+81501",
+    url: "https://www.airbnb.com/rooms/635701206654748882?adults=4&check_in=2026-12-10&check_out=2026-12-14&children=1&infants=1"
+  }
+];
+// -------------------------------------
+
+const nights = 4;
+const money = n => "$" + n.toLocaleString();
+const minTotal = Math.min(...stays.map(s => s.total));
+const maxBeds = Math.max(...stays.map(s => s.bedrooms));
+const minDist = Math.min(...stays.map(s => s.driveMi));
+const maxBaths = Math.max(...stays.map(s => s.baths));
+
+document.getElementById("cards").innerHTML = stays.map(s => {
+  const badges = [];
+  if (s.total === minTotal) badges.push("Lowest price");
+  if (s.bedrooms === maxBeds) badges.push("Most bedrooms");
+  if (s.driveMi === minDist) badges.push("Closest to Avalon");
+  const was = s.wasTotal ? ` <small><s>${money(s.wasTotal)}</s></small>` : "";
+  return `
+  <div class="card">
+    <div class="badges">${badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>
+    <h2>${s.name}</h2>
+    <p class="type">${s.type}</p>
+    <p class="price">${money(s.total)}${was} <small>for ${nights} nights</small></p>
+    <div class="row"><span>Per night</span><span>${money(Math.round(s.total / nights))}</span></div>
+    <div class="row"><span>Bedrooms</span><span>${s.bedrooms} (${s.beds} beds)</span></div>
+    <div class="row"><span>To Avalon Theatre</span><span>${s.google}</span></div>
+    <a class="btn" href="${s.url}" target="_blank" rel="noopener">View on Airbnb</a>
+  </div>`;
+}).join("");
+
+const best = (v, all, low) => (low ? v === Math.min(...all) : v === Math.max(...all)) ? "best" : "";
+const rows = [
+  ["Total (4 nights)", s => money(s.total), s => best(s.total, stays.map(x => x.total), true)],
+  ["Per night", s => money(Math.round(s.total / nights)), s => best(s.total, stays.map(x => x.total), true)],
+  ["Bedrooms", s => s.bedrooms, s => best(s.bedrooms, stays.map(x => x.bedrooms), false)],
+  ["Beds", s => s.beds, () => ""],
+  ["Bathrooms", s => s.baths, s => best(s.baths, stays.map(x => x.baths), false)],
+  ["Sleeps", s => s.sleeps, () => ""],
+  ["Drive to Avalon Theatre", s => s.google, s => best(s.driveMi, stays.map(x => x.driveMi), true)],
+  ["Google Maps", s => `<a href="${s.maps}" target="_blank" rel="noopener">Open directions</a>`, () => ""],
+  ["Rating", s => s.rating, () => ""]
+];
+document.getElementById("table").innerHTML =
+  "<tr><th></th>" + stays.map(s => `<th>${s.name.replace(/\*/g, "")}</th>`).join("") + "</tr>" +
+  rows.map(r => `<tr><th>${r[0]}</th>` + stays.map(s => `<td class="${r[2](s)}">${r[1](s)}</td>`).join("") + "</tr>").join("");
+</script>
+</body>
+</html>
