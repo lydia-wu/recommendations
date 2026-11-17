@@ -54,13 +54,63 @@
 </style>
 </head>
 <body>
-<nav class="nav"><a href="https://lydia-wu.github.io/recommendations/index.html" class="">Home</a><a href="https://lydia-wu.github.io/recommendations/recipes.html" class="active">Recipes</a><a href="https://lydia-wu.github.io/recommendations/bread.html" class="">Bread</a><a href="https://lydia-wu.github.io/recommendations/baby.html" class="">Baby</a><a href="https://lydia-wu.github.io/recommendations/ec.html" class="">EC</a></nav>
+<nav class="nav"><a href="https://lydia-wu.github.io/recommendations/index.html" class="">Home</a><a href="https://lydia-wu.github.io/recommendations/recipes.html" class="active">Recipes</a><a href="https://lydia-wu.github.io/recommendations/bread.html" class="">Bread</a><a href="https://lydia-wu.github.io/recommendations/baby.html" class="">Baby</a><a href="https://lydia-wu.github.io/recommendations/ec.html" class="">EC</a><a href="https://lydia-wu.github.io/recommendations/toddler-activities.html" class="">Toddler</a></nav>
 <div class="page-hero">
   <p class="hero-eyebrow">Tried & tested</p>
   <h1>Lydia's <em>Recipes</em></h1>
 </div>
 <div class="section">
   <div class="section-header"><span class="section-icon">👩‍🍳</span><h2 class="section-title">Recipes</h2><div class="section-line"></div></div>
+<!-- Baked Butternut with Spiced Pears -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🍐</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Baked Butternut with Spiced Pears</div>
+        <div class="recipe-meta">GF · No added sugar · No cornstarch · Serves 1 + extra pears · 385 cal · 31g protein</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <p style="font-size:13px;color:var(--mid-gray);font-weight:300;line-height:1.5;margin:14px 0 0;">Start your day with steadier blood sugar, calmer energy, and a grounded nervous system. In Traditional Chinese medicine, pears are a classic autumn food. Stewed, they're gentle on digestion and moistening, and paired with warming spices they make this bowl nourishing and supportive of digestion.</p>
+      <div class="recipe-section-label">Macros (per serving)</div>
+      <ul class="recipe-ingredients">
+        <li>385 calories · 31g protein · 32g carbs · 12g fat · 10g fibre</li>
+      </ul>
+      <div class="recipe-section-label">Baked Butternut</div>
+      <ul class="recipe-ingredients">
+        <li>¾ cup roasted butternut squash purée (canned works too)</li>
+        <li>1 egg</li>
+        <li>1 tbsp oat flour (certified gluten-free; just blended oats)</li>
+        <li>½ tsp vanilla · ½ tsp cinnamon</li>
+        <li>Pinch of nutmeg · pinch of salt</li>
+      </ul>
+      <div class="recipe-section-label">Stewed Cardamom Pears (makes 4 servings)</div>
+      <ul class="recipe-ingredients">
+        <li>2 medium pears, diced</li>
+        <li>½ tsp cardamom</li>
+        <li>1 tsp freshly grated ginger</li>
+        <li>Pinch of salt · 2 tbsp water</li>
+      </ul>
+      <div class="recipe-section-label">Topping</div>
+      <ul class="recipe-ingredients">
+        <li>⅓ cup skyr or Greek yogurt mixed with ½ scoop vanilla protein powder (whey)</li>
+        <li>1 tbsp chopped pecans</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Halve the squash, scoop out the seeds, and roast cut side down at 400°F for 40–50 minutes until very soft. Blend until smooth, or use canned.</li>
+        <li>Whisk the purée, egg, oat flour, vanilla, cinnamon, nutmeg, and salt. Pour into a small oven-safe bowl and bake at 350°F for 28–30 minutes until set. A very slight wobble in the center is okay. Rest 5 minutes.</li>
+        <li>While it bakes, add pears, cardamom, ginger, salt, and water to a small pot. Cover and stew on low about 15 minutes until soft.</li>
+        <li>Top the baked butternut with the yogurt protein topping, a quarter of the stewed pears, and the pecans.</li>
+      </ol>
+      <div class="recipe-section-label">Notes</div>
+      <ul class="recipe-ingredients">
+        <li>Eat right away, or cover and refrigerate overnight and reheat in the morning</li>
+      </ul>
+    </div>
+  </div>
+
 <!-- Southern Chicken and Dumplings -->
   <div class="recipe-card">
     <div class="recipe-header" onclick="toggleRecipe(this)">
@@ -1499,21 +1549,7 @@
 
 </div>
 
-<script>
-  function toggleRecipe(header) {
-    const body = header.nextElementSibling;
-    const toggle = header.querySelector('.recipe-toggle');
-    body.classList.toggle('open');
-    toggle.classList.toggle('open');
-  }
 
-  function toggleSection(btn) {
-    const body = btn.closest('.section').querySelector('.section-body');
-    body.classList.toggle('open');
-    btn.textContent = body.classList.contains('open') ? 'Hide' : 'Show';
-  }
-</script>
-</div>
 <footer>Made with love by Lydia 🤍<br><span style="font-size:11px;">Some links are affiliate links — I may earn a small commission at no cost to you.</span></footer>
 <script>
   function toggleRecipe(header) {

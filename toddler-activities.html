@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toddler Activities — Lydia's Recommendations</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --dark:#141413; --light:#faf9f5; --mid-gray:#b0aea5; --light-gray:#e8e6dc; --orange:#d97757; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--light);color:var(--dark);font-family:"DM Sans",sans-serif;min-height:100vh;}
+  .nav{background:var(--dark);padding:14px 20px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;}
+  .nav a{color:var(--mid-gray);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:5px 12px;border-radius:20px;transition:color 0.2s,background 0.2s;}
+  .nav a:hover,.nav a.active{color:var(--light);background:rgba(255,255,255,0.12);}
+  .page-hero{background:var(--dark);padding:40px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+  .page-hero::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:var(--orange);opacity:0.12;}
+  .hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+  .page-hero h1{font-family:"Playfair Display",serif;font-size:clamp(28px,6vw,42px);color:var(--light);font-weight:400;line-height:1.15;}
+  .page-hero h1 em{font-style:italic;color:var(--orange);}
+  .section{padding:40px 20px 32px;max-width:600px;margin:0 auto;}
+  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+  .section-icon{font-size:22px;}
+  .section-title{font-family:"Playfair Display",serif;font-size:26px;font-weight:600;color:var(--dark);}
+  .section-line{flex:1;height:1px;background:var(--light-gray);}
+  .product-card{background:white;border-radius:16px;padding:20px;margin-bottom:14px;display:flex;align-items:center;gap:16px;box-shadow:0 1px 3px rgba(20,20,19,0.06);transition:transform 0.2s,box-shadow 0.2s;text-decoration:none;color:inherit;}
+  .product-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(20,20,19,0.1);}
+  .product-emoji{font-size:32px;min-width:48px;text-align:center;}
+  .product-info{flex:1;}
+  .product-name{font-size:15px;font-weight:500;color:var(--dark);margin-bottom:4px;line-height:1.3;}
+  .product-note{font-size:13px;color:var(--mid-gray);font-weight:300;line-height:1.4;}
+  .product-cta{font-size:12px;font-weight:500;color:var(--orange);white-space:nowrap;}
+  .product-cta::after{content:"→";}
+  .recipe-card{background:white;border-radius:16px;margin-bottom:14px;box-shadow:0 1px 3px rgba(20,20,19,0.06);overflow:hidden;}
+  .recipe-header{display:flex;align-items:center;gap:12px;padding:18px 20px;cursor:pointer;user-select:none;}
+  .recipe-header:hover{background:#fdf9f2;}
+  .recipe-emoji{font-size:28px;min-width:40px;text-align:center;}
+  .recipe-title-wrap{flex:1;}
+  .recipe-name{font-size:15px;font-weight:500;color:var(--dark);margin-bottom:3px;}
+  .recipe-meta{font-size:12px;color:var(--mid-gray);font-weight:300;}
+  .recipe-toggle{font-size:22px;color:var(--orange);transition:transform 0.3s;line-height:1;}
+  .recipe-toggle.open{transform:rotate(45deg);}
+  .recipe-body{display:none;padding:0 20px 20px;border-top:1px solid var(--light-gray);}
+  .recipe-body.open{display:block;animation:fadeUp 0.25s ease both;}
+  .recipe-section-label{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin:16px 0 8px;}
+  .recipe-ingredients{list-style:none;padding:0;}
+  .recipe-ingredients li{font-size:14px;color:var(--dark);padding:6px 0;border-bottom:1px solid var(--light-gray);font-weight:300;line-height:1.4;}
+  .recipe-ingredients li:last-child{border-bottom:none;}
+  .recipe-steps{list-style:none;padding:0;counter-reset:steps;}
+  .recipe-steps li{font-size:14px;color:var(--dark);padding:8px 0 8px 34px;border-bottom:1px solid var(--light-gray);font-weight:300;line-height:1.5;position:relative;counter-increment:steps;}
+  .recipe-steps li::before{content:counter(steps);position:absolute;left:0;top:9px;width:20px;height:20px;background:var(--orange);color:white;border-radius:50%;font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .recipe-steps li:last-child{border-bottom:none;}
+  footer{text-align:center;padding:40px 24px 48px;font-size:12px;color:var(--mid-gray);line-height:1.8;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+<nav class="nav"><a href="https://lydia-wu.github.io/recommendations/index.html" class="">Home</a><a href="https://lydia-wu.github.io/recommendations/recipes.html" class="">Recipes</a><a href="https://lydia-wu.github.io/recommendations/bread.html" class="">Bread</a><a href="https://lydia-wu.github.io/recommendations/baby.html" class="">Baby</a><a href="https://lydia-wu.github.io/recommendations/ec.html" class="">EC</a><a href="https://lydia-wu.github.io/recommendations/toddler-activities.html" class="active">Toddler</a></nav>
+<div class="page-hero">
+  <p class="hero-eyebrow">Little hands, big fun</p>
+  <h1>Toddler <em>Activities</em></h1>
+</div>
+<div class="section">
+  <div class="section-header"><span class="section-icon">🎨</span><h2 class="section-title">Activities</h2><div class="section-line"></div></div>
+
+  <!-- Handprint Ornaments -->
+  <div class="recipe-card">
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-emoji">🎄</div>
+      <div class="recipe-title-wrap">
+        <div class="recipe-name">Handprint Ornaments</div>
+        <div class="recipe-meta">Baking soda dough · Air dry 2–3 days</div>
+      </div>
+      <div class="recipe-toggle">+</div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-section-label">Materials</div>
+      <ul class="recipe-ingredients">
+        <li>1 cup baking soda</li>
+        <li>½ cup cornstarch</li>
+        <li>¾ cup water</li>
+        <li>Damp cloth</li>
+        <li>Ribbon</li>
+      </ul>
+      <div class="recipe-section-label">Instructions</div>
+      <ol class="recipe-steps">
+        <li>Mix baking soda, cornstarch, and water in a saucepan. Stir over low heat until it reaches a mashed potato-like consistency. Keep the dough slightly wet rather than too dry.</li>
+        <li>Wrap in a damp cloth and let cool about 10 minutes.</li>
+        <li>Roll out the dough to about ½ inch thick.</li>
+        <li>Press your toddler's hand into the dough and poke a hole at the top for the ribbon.</li>
+        <li>Let air dry 2–3 days, then add ribbon and hang on the tree!</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="padding-top:0;">
+  <div class="section-header"><span class="section-icon">📍</span><h2 class="section-title">Places to Go</h2><div class="section-line"></div></div>
+
+  <a class="product-card" href="https://maps.app.goo.gl/wNhNRwhLPXukvcCh6" target="_blank">
+    <div class="product-emoji">📍</div>
+    <div class="product-info">
+      <div class="product-name">Carpio Sanguinette Park</div>
+      <div class="product-note">Tap to open in Google Maps.</div>
+    </div>
+    <div class="product-cta">Map</div>
+  </a>
+</div>
+
+<footer>Made with love by Lydia 🤍<br><span style="font-size:11px;">Some links are affiliate links — I may earn a small commission at no cost to you.</span></footer>
+<script>
+  function toggleRecipe(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.recipe-toggle');
+    body.classList.toggle('open');
+    toggle.classList.toggle('open');
+  }
+
+  function toggleSection(btn) {
+    const body = btn.closest('.section').querySelector('.section-body');
+    body.classList.toggle('open');
+    btn.textContent = body.classList.contains('open') ? 'Hide' : 'Show';
+  }
+</script>
+</body>
+</html>
